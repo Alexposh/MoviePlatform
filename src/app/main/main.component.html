@@ -1,0 +1,35 @@
+<button mat-button (click)='loadMovies()'>Load the movies</button>
+
+<select mat-select>
+  <option>Page 1</option>
+  <option>Page 2</option>
+  <option>Page 3</option>
+  <!-- exact number of pages that we have -->
+</select>
+
+<button mat-button [disabled]="pageNumberCurent == 0" (click)="navigate('prev')">Previous</button>
+<button mat-button (click)="navigate('next')">Next</button>
+
+
+
+<div class="container">
+  <div class="row">
+<div class="card" style="width: 18rem;" *ngFor="let movie of allmovies">
+    <!-- <img class="card-img-top" src="" alt="Card image cap"> -->
+    <div class="card-body">
+      <h2 class="card-title">{{movie.title}}</h2>
+      <p class="card-text">{{movie.overview}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Released on {{movie.release_date}}</li>
+      <li class="list-group-item">Duration: {{movie.runtime}} minutes</li>
+      <li class="list-group-item">Rating: {{movie.vote_average}} from {{movie.vote_count}} votes</li>
+    </ul>
+    <div class="card-body" *ngIf="movie.homepage">
+      <a href="{{movie.homepage}}" class="card-link" target="_blank">Website</a>
+    </div>
+    <a [routerLink]="['/single-movie', movie.movie_id]" ><button mat-button >Read More</button></a>
+    <!-- <componenta-movie-single [movie]="movie"></componenta-movie-single> -->
+  </div>
+</div>
+</div>

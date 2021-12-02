@@ -1,0 +1,27 @@
+<div class="navbar">
+     <img src="../../assets/brand3.png" alt="Logo">
+
+
+     <ul>
+          <li *ngFor="let page of pages"><a mat-stroked-button [routerLink]="page.pagePath">{{page.pageName}}</a></li>
+
+     </ul>
+
+     <mat-form-field appearance="fill">
+          <mat-label class="label">Genres</mat-label>
+          <mat-select [ngModel]="selected_genre" [(value)]="selected_genre" (ngModelChange)="afterSelect()">
+               <mat-option class="option" *ngFor="let genre of genreList" [value]="genre.genre_id">
+                    {{genre.genre_name}}</mat-option>
+          </mat-select>
+     </mat-form-field>
+
+
+     <div>
+          <!-- Search should be active only after 3 keys have been pressed -->
+          <input type="text" placeholder="Title search..." [(ngModel)]="searchTitle" (keyup)="changeSearch()">
+          <button mat-button (click)="search()">Search</button>
+     </div>
+
+     <button mat-button> Sign in</button>
+     <br>
+</div>

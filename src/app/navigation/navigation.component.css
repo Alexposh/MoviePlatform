@@ -1,0 +1,21 @@
+.navbar{
+    background-color: rgba(41,110,144,255);
+    color:rgba(159,231,55,255);
+}
+
+li{
+    display:inline-flex;
+    padding: 5px;
+    color: rgba(159,231,55,255);
+}
+
+img{
+    width: 180px;
+}
+.option{
+    color:rgba(41,110,144,255);
+}
+
+.label{
+    color:rgba(159,231,55,255);
+}

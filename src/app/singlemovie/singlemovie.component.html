@@ -1,0 +1,38 @@
+<div *ngIf="featuredMovie; else loadingMovie">
+    <h2>{{featuredMovie.title}}</h2>
+    <p>Original title: {{featuredMovie.title}}</p>
+    <span>Realease date: {{featuredMovie.release_date | date: 'yyyy/MM/dd'}}</span> <span>  Runtime: {{featuredMovie.runtime}} </span>
+    <p>Rating: {{featuredMovie.vote_average}}/10</p>
+
+    <p>Description: {{featuredMovie.overview}}</p>
+
+    <p>{{featuredMovie.vote_count}} user reviews</p>
+    <span *ngFor="let crew_member of movie_crew" >
+        <p *ngIf="crew_member.job == 'Director'"> Director: {{crew_member.person_name}}</p>
+    </span>
+
+    <span *ngFor="let crew_member of movie_crew" >
+        <p *ngIf="crew_member.job == 'Writer'"> {{crew_member.job}}: {{crew_member.person_name}}</p>
+    </span>
+    
+    
+    
+    <div>
+        Tagline: "{{ featuredMovie.tagline }}"
+    </div>
+
+<button (click)="showCast()" *ngIf="!castShown">Show Cast</button>
+<button *ngIf="castShown" (click)="hideCast()">Hide Cast</button>
+    <div class="cast" *ngIf="castShown">
+        <ul>
+            <li *ngFor="let actor of cast_members">{{actor.person_name}} playing {{ actor.character_name }}</li>
+        </ul>
+    </div>
+</div>
+
+
+<ng-template #loadingMovie>
+    <div>
+        Loading still...
+    </div>
+</ng-template>
