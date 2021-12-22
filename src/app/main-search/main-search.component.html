@@ -1,3 +1,23 @@
-<div>
-    searching for: {{searchTerm}}
-</div>
+
+
+<div class="container">
+    <div class="row">
+      <div class="card" style="width: 18rem;" *ngFor="let movie of movies">
+        <!-- <img class="card-img-top" src="" alt="Card image cap"> -->
+        <div class="card-body">
+          <h2 class="card-title">{{movie.title}}</h2>
+          <p class="card-text">{{movie.overview}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Released on {{movie.release_date}}</li>
+          <li class="list-group-item">Duration: {{movie.runtime}} minutes</li>
+          <li class="list-group-item">Rating: {{movie.vote_average}} from {{movie.vote_count}} votes</li>
+        </ul>
+        <div class="card-body" *ngIf="movie.homepage">
+          <a href="{{movie.homepage}}" class="card-link" target="_blank">Website</a>
+        </div>
+        <a [routerLink]="['/single-movie', movie.movie_id]"><button mat-button>Read More</button></a>
+        <!-- <componenta-movie-single [movie]="movie"></componenta-movie-single> -->
+      </div>
+    </div>
+  </div>

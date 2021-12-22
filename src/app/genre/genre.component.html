@@ -1,4 +1,41 @@
-<ul>
-    <li *ngFor="let movie of moviesFromGenre">{{movie.title}}
-    </li>
-</ul>
+<button mat-button [disabled]="pageNumberCurrent == 0" (click)="navigate('prev')">Previous</button>
+<button mat-button (click)="navigate('next')">Next</button>
+<div class="container">
+    <div class="row">
+  <div class="card" style="width: 18rem;" *ngFor="let movie of moviesFromGenre">
+      <!-- <img class="card-img-top" src="" alt="Card image cap"> -->
+      <div class="card-body">
+        <h2 class="card-title">{{movie.title}}</h2>
+        <p class="card-text">{{movie.overview}}</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Released on {{movie.release_date}}</li>
+        <li class="list-group-item">Duration: {{movie.runtime}} minutes</li>
+        <li class="list-group-item">Rating: {{movie.vote_average}} from {{movie.vote_count}} votes</li>
+      </ul>
+      <div class="card-body" *ngIf="movie.homepage">
+        <a href="{{movie.homepage}}" class="card-link" target="_blank">Website</a>
+      </div>
+      <a [routerLink]="['/single-movie', movie.movie_id]" ><button mat-button >Read More</button></a>
+      <!-- <componenta-movie-single [movie]="movie"></componenta-movie-single> -->
+    </div>
+  </div>
+  </div>
+  <div class="navigation">
+  <button mat-raised-button (click)="navigateFirst()" [disabled] = "pageNumberCurrent === 0">First page</button> <!--  if the current page is 0 is disabled and   -->
+  <button mat-raised-button *ngIf="pageNumberCurrent > 0 && pageNumberCurrent - 2 > 0">...</button>
+  <button mat-raised-button (click)="navigate('prev')" [disabled] = "pageNumberCurrent === 0">Previous page</button> 
+  <button mat-raised-button (click)="navigateToPage(pageNumberCurrent-1)" *ngIf="pageNumberCurrent >= 1">{{pageNumberCurrent}}</button>
+  <button mat-raised-button color="primary">{{pageNumberCurrent +1}}</button>
+  <button mat-raised-button (click)="navigateToPage(pageNumberCurrent + 2)" *ngIf="pageNumberCurrent < numberOfPagesInGenre">{{pageNumberCurrent + 2}}</button>
+  <button mat-raised-button (click)="navigate('next')" [disabled] = "pageNumberCurrent === numberOfPagesInGenre">Next page</button>
+  <button mat-raised-button *ngIf="pageNumberCurrent < numberOfPagesInGenre && pageNumberCurrent +2 < numberOfPagesInGenre">...</button>
+  <button mat-raised-button (click)="navigateLast()" [disabled] = "pageNumberCurrent === numberOfPagesInGenre">Last page</button>
+  </div>
+ 
+  <div>
+    <button *ngFor="let pra of pageRangeArray" mat-raised-button (click)="navigateToPage(pra)">{{pra}}</button>
+  </div>
+  <p>Number of pages: {{ numberOfPagesInGenre }}</p>
+  <p>Number of movies in genre: {{ nrOfMoviesInGenre }}</p>
+  <button (click)="displayCache()">Display cache</button>

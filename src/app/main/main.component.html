@@ -7,29 +7,54 @@
   <!-- exact number of pages that we have -->
 </select>
 
+<!-- TODO: butonul de next ar trebui sa fie disabled daca suntem pe ultima pagina -->
+<!-- TODO: de adaugat paginare si pe genres -->
+
 <button mat-button [disabled]="pageNumberCurent == 0" (click)="navigate('prev')">Previous</button>
 <button mat-button (click)="navigate('next')">Next</button>
+<div>
+  Page {{pageNumberCurent}} of <button mat-raised-button (click)="navigateLast()">{{numberOfPages}}</button>
+  <br>
 
+  <div>
+    <button mat-raised-button (click)="navigateFirst()" *ngIf="pageNumberCurent >= 3">0</button>
 
+    <span *ngIf="pageNumberCurent - 3 > 0"> <button mat-raised-button> ... </button> </span>
+    
+    <span  *ngFor="let i of [pageNumberCurent - 2, pageNumberCurent - 1, pageNumberCurent, pageNumberCurent + 1, pageNumberCurent + 2]">
+      <button mat-raised-button *ngIf="i >= 0 && i < numberOfPages" (click)="navigateToPage(i)">
+       {{i}}        
+      </button>
+    </span>
+
+    <!-- {{pageNumberCurent}} -->
+    <span *ngIf="numberOfPages - pageNumberCurent > 2">
+      <button mat-raised-button> ... </button>
+    </span>
+
+    <button mat-raised-button (click)="navigateLast()" [disabled]="pageNumberCurent == numberOfPages">{{numberOfPages}}</button>
+  </div>
+
+</div>
 
 <div class="container">
   <div class="row">
-<div class="card" style="width: 18rem;" *ngFor="let movie of allmovies">
-    <!-- <img class="card-img-top" src="" alt="Card image cap"> -->
-    <div class="card-body">
-      <h2 class="card-title">{{movie.title}}</h2>
-      <p class="card-text">{{movie.overview}}</p>
+    <div class="card" style="width: 18rem;" *ngFor="let movie of allmovies">
+      <!-- <img class="card-img-top" src="" alt="Card image cap"> -->
+      <div class="card-body">
+        <h2 class="card-title">{{movie.title}}</h2>
+        <p class="card-text">{{movie.overview}}</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Released on {{movie.release_date}}</li>
+        <li class="list-group-item">Duration: {{movie.runtime}} minutes</li>
+        <li class="list-group-item">Rating: {{movie.vote_average}} from {{movie.vote_count}} votes</li>
+      </ul>
+      <div class="card-body" *ngIf="movie.homepage">
+        <a href="{{movie.homepage}}" class="card-link" target="_blank">Website</a>
+      </div>
+      <a [routerLink]="['/single-movie', movie.movie_id]"><button mat-button>Read More</button></a>
+      <!-- <componenta-movie-single [movie]="movie"></componenta-movie-single> -->
     </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Released on {{movie.release_date}}</li>
-      <li class="list-group-item">Duration: {{movie.runtime}} minutes</li>
-      <li class="list-group-item">Rating: {{movie.vote_average}} from {{movie.vote_count}} votes</li>
-    </ul>
-    <div class="card-body" *ngIf="movie.homepage">
-      <a href="{{movie.homepage}}" class="card-link" target="_blank">Website</a>
-    </div>
-    <a [routerLink]="['/single-movie', movie.movie_id]" ><button mat-button >Read More</button></a>
-    <!-- <componenta-movie-single [movie]="movie"></componenta-movie-single> -->
   </div>
-</div>
 </div>

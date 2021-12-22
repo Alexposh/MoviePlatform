@@ -9,6 +9,11 @@ li{
     color: rgba(159,231,55,255);
 }
 
+li :hover{
+    
+    color: rgba(235, 237, 245);
+}
+
 img{
     width: 180px;
 }

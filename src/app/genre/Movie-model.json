@@ -1,0 +1,68 @@
+{
+    "currentGenre":"xxx",
+    "currentPage" : 1,
+    "isLast" : true,
+    "totalPages": 2,
+    "currentPageItems" : [
+    {
+        "movie_id": "number",
+        "title": "High School Musical",
+        "budget": 4200000,
+        "homepage": "http://tv.disney.go.com/disneychannel/originalmovies/highschoolmusical/index.html",
+        "overview": "Troy (Zac Efron), the popular captain of the basketball team, and Gabriella (Vanessa Anne Hudgens), the brainy and beautiful member of the academic club, break all the rules of East High society when they secretly audition for the leads in the school's musical. As they reach for the stars and follow their dreams, everyone learns about acceptance, teamwork, and being yourself. And it's all set to fun tunes and very cool dance moves!",
+        "popularity": "16.536374",
+        "release_date": "2006-01-20", 
+        "revenue": 0,
+        "runtime": 98,
+        "movie_status": "Released",
+        "tagline": "This School Rocks Like No Other!",
+        "vote_average": "6.10",
+        "vote_count": 1000
+    },
+    {
+        "movie_id": 13187,
+        "title": "A Charlie Brown Christmas",
+        "budget": 0,
+        "homepage": "",
+        "overview": "When Charlie Brown complains about the overwhelming materialism that he sees amongst everyone during the Christmas season, Lucy suggests that he become director of the school Christmas pageant. Charlie Brown accepts, but is a frustrating struggle. When an attempt to restore the proper spirit with a forlorn little fir Christmas tree fails, he needs Linus' help to learn the meaning of Christmas.",
+        "popularity": "8.701183",
+        "release_date": "1965-12-09",
+        "revenue": 0,
+        "runtime": 25,
+        "movie_status": "Released",
+        "tagline": "That's what Christmas is all about, Charlie Brown!",
+        "vote_average": "7.50",
+        "vote_count": 153
+    },
+    {
+        "movie_id": 22488,
+        "title": "Love's Abiding Joy",
+        "budget": 0,
+        "homepage": "",
+        "overview": "The continued Westward journey of settlers Missie and Willie Lahaye. Their roots now firmly planted as they set up homestead in the far West, Missie begins to realize her passion for teaching as Willie cares for the couple's young daughter Kathy while expanding the family ranch with a little help from sons Jeff and Matthew. When the frontier railroad comes to town, the pleasure of a long-promised visit from Missie's father Clark is suddenly offset by the tragic death of young Kathy. As the untimely demise of their beloved daughter begins to drive an emotional wedge between Missie and Willie, the devastated father unexpectedly accepts an offer made by the powerful Samuel Doros to assume the role of town sheriff. Their faith shaken and their once close-knit bond suddenly torn asunder, Missie and Willie desperately attempt to bring their crumbling family back together as son Jeff faces a series of dangers while hopelessly falling for Doros' beautiful daughter Colette.",
+        "popularity": "1.128559",
+        "release_date": "2006-10-06",
+        "revenue": 0,
+        "runtime": 87,
+        "movie_status": "Released",
+        "tagline": "",
+        "vote_average": "5.80",
+        "vote_count": 12
+    },
+    {
+        "movie_id": 78814,
+        "title": "We Have Your Husband",
+        "budget": 0,
+        "homepage": "",
+        "overview": "American-born Jayne Valseca, her husband Eduardo, the son of a legendary Mexican newspaper publisher, and their two children live an idyllic life on their 1,000 acre ranch outside of a peaceful Mexico town. But in the summer of 2007, their peaceful life is turned into a real-life nightmare when Eduardo is ambushed and kidnapped by strangers. With kidnapping becoming a pervasive and lucrative business in Mexico, Jayne is at the mercy of the kidnappers when they demand millions for the husband's safe release. She's pushed to the limit to do everything she possibly can to raise the money necessary to bring Eduardo back alive. As Eduardo is starved and tortured, he looses hope of ever seeing his family again but despite the dire and bleak times, Jayne refuses to give up and decides to turn the tables on the kidnappers and makes demands of her own. The film is based on a true story from the book, We Have Your Husband: One Woman's Terrifying Story of a Kidnapping in Mexico.",
+        "popularity": "0.102003",
+        "release_date": "2011-11-12",
+        "revenue": 0,
+        "runtime": 89,
+        "movie_status": "Released",
+        "tagline": "",
+        "vote_average": "5.00",
+        "vote_count": 3
+    }
+]
+}
