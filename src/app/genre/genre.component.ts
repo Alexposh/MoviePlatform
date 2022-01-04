@@ -2,13 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Movie } from '../models/movie';
+import { NavigationPage } from '../models/navigation.page';
 import { Page } from '../models/page';
 
 
-class NavigationPage{
-  pageNumber?: number;
-  pageLabel?: string;
-}
+
 
 @Component({
   selector: 'app-genre',
@@ -24,20 +22,20 @@ export class GenreComponent implements OnInit {
 
   // TODO: how can we avoid any[] and specify a type instead
   // ! we cannot use number[] pentru ca '...'
-  pageRangeArray: any[] = []; // [3,4,5,6,7]
+  pageRangeArray: NavigationPage[] = []; // [3,4,5,6,7]
 
   nrOfMoviesInGenre: number = -1;
   numberOfPagesInGenre: number = -1;
   dateIncarcatePeGenre: Map<string, any[]> = new Map<string, any[]>();
 
-  
+
   // dateIncarcatePeGenre: Map<string, Map<number, any[]>> = ...
   // 'Sci-Fi'
-      // 0 - [...]
-      // 1 - [...]
+  // 0 - [...]
+  // 1 - [...]
   // 'Drama'
-      // 0 - [...]
-      // ...
+  // 0 - [...]
+  // ...
   // previouslyLoadedGenre: string = '';
 
   navigate(type: string) {
@@ -66,13 +64,51 @@ export class GenreComponent implements OnInit {
     }
   }
 
+  generatePA(n: number, numberOfPages: number): NavigationPage[] {
+    let result: NavigationPage[] = [];
+
+    let firstPage: NavigationPage = new NavigationPage();
+    if (n > 2) {
+      //
+     
+      firstPage.pageLabel = 'First Page';
+      firstPage.pageNumber = 0;
+      result.push(firstPage);
+
+    } else {
+      // firstPage.disabled = true;
+    }
+    // 
+    for (let i = n - 2; i <= n + 2; i++) {
+      if (i >= 0 && i <= numberOfPages) {
+        let currentPage = new NavigationPage();
+       
+        if(i == n ){
+          currentPage.isCurrent = true;
+        }
+        currentPage.pageLabel =  i == numberOfPages ? ( "Last Page [" + (numberOfPages+1)  + "]") :  ("" + (i+1));
+
+        // currentPage.pageLabel =  i == 0 ? "First Page" : ("" + (i+1));
+        currentPage.pageNumber = i;
+        result.push(currentPage);
+      }
+    }
+    if (n < numberOfPages - 2) {
+      let lastPage = new NavigationPage();
+      lastPage.pageLabel = 'Last Page [' + (numberOfPages+1) + ']';
+      lastPage.pageNumber = numberOfPages;
+      result.push(lastPage); // last page
+    }
+    return result;
+  }
+
   loadMoviesFromGenre(page: number): void {
     console.log('loading movies');
     let dacaExistaDeja = this.dateIncarcatePeGenre.has(this.pageNumberCurrent);
     console.log('daca exista deja: ', dacaExistaDeja);
     console.log('DATE INCARCATE IN CACHE: ', this.dateIncarcatePeGenre)
     if (dacaExistaDeja) {
-      this.moviesFromGenre = this.dateIncarcatePeGenre.get(this.genreSelected+'-'+page) || []; // load from 'cache'
+      this.moviesFromGenre = this.dateIncarcatePeGenre.get(this.genreSelected + '-' + page) || []; // load from 'cache'
     } else {
       const url = 'http://localhost:8000/movies-in-genre-by-genre-id-extra-details/' + this.genreSelected + '/' + page;
       // return this.http.get<any[]>(url);
@@ -80,17 +116,21 @@ export class GenreComponent implements OnInit {
         listaFilme => {
           this.moviesFromGenre = listaFilme['theMoviesOnCurrentPage'];// this.moviesFromGenre.concat(listaFilme);
           console.log(this.moviesFromGenre);
-          this.dateIncarcatePeGenre.set(this.genreSelected+'-'+this.pageNumberCurrent, listaFilme['theMoviesOnCurrentPage']);
+          this.dateIncarcatePeGenre.set(this.genreSelected + '-' + this.pageNumberCurrent, listaFilme['theMoviesOnCurrentPage']);
 
           this.nrOfMoviesInGenre = listaFilme['numberOfMovies'];
           this.numberOfPagesInGenre = Math.floor(this.nrOfMoviesInGenre / 4) + (this.nrOfMoviesInGenre % 4 != 0 ? 1 : 0) - 1;
 
 
-          this.pageRangeArray = [page-2, page-1, page, page+1, page+2];
-          this.pageRangeArray = this.pageRangeArray.filter(x => x >= 0).filter(x => x <= this.numberOfPagesInGenre);
-          if(page > 3){
-            this.pageRangeArray = ['...'].concat(this.pageRangeArray);
-          }
+          this.pageRangeArray = this.generatePA(page, this.numberOfPagesInGenre);
+          // this.pageRangeArray = [page-2, page-1, page, page+1, page+2];  // page-2 .... page + 2
+          // this.pageRangeArray = this.pageRangeArray.filter(x => x >= 0).filter(x => x <= this.numberOfPagesInGenre);
+          // if(page > 3){
+          //   this.pageRangeArray = ['...'].concat(this.pageRangeArray);
+          //   this.pageRangeArray = [0].concat(this.pageRangeArray);
+          // }
+          // this.pageRangeArray.push(this.numberOfPagesInGenre);
+
           // this.dateIncarcatePeGenre.set(this.genreSelected+'-'+this.pageNumberCurrent, listaFilme.currentPageItems);
           // currentPageItems
 
@@ -100,7 +140,7 @@ export class GenreComponent implements OnInit {
     }
   }
 
-  displayCache(){
+  displayCache() {
     console.log('CACHE: ', this.dateIncarcatePeGenre);
   }
 
@@ -116,7 +156,7 @@ export class GenreComponent implements OnInit {
 
   // page: NavigationPage
   navigateToPage(page: any) {
-    if(page == '...'){
+    if (page == '...') {
       return;
     }
     this.pageNumberCurrent = page;

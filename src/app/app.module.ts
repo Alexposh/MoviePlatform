@@ -17,6 +17,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { FormsModule } from '@angular/forms';
 import { MainSearchComponent } from './main-search/main-search.component';
 import { GenreComponent } from './genre/genre.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { GenreComponent } from './genre/genre.component';
     SinglemovieComponent,
     NavigationComponent,
     MainSearchComponent,
-    GenreComponent
+    GenreComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,

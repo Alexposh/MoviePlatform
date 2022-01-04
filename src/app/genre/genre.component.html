@@ -34,8 +34,15 @@
   </div>
  
   <div>
-    <button *ngFor="let pra of pageRangeArray" mat-raised-button (click)="navigateToPage(pra)">{{pra}}</button>
+    <button *ngFor="let pra of pageRangeArray" [color]="pra.isCurrent ? 'primary' : ''" [disabled] = "pra.disabled" mat-raised-button (click)="navigateToPage(pra.pageNumber)">{{pra.pageLabel}}</button>
   </div>
   <p>Number of pages: {{ numberOfPagesInGenre }}</p>
   <p>Number of movies in genre: {{ nrOfMoviesInGenre }}</p>
   <button (click)="displayCache()">Display cache</button>
+
+  <select >
+    <option>Asc</option>
+    <option >Desc</option>
+  </select>
+<br>
+  <app-pagination></app-pagination>
