@@ -112,6 +112,9 @@ export class MainComponent implements OnInit {
     this.loadMoviesForPage(this.pageNumberCurent);
   }
 
+  changePage(page:any){
+    this.navigateToPage(page);
+  }
 
   ngOnInit(): void {
 

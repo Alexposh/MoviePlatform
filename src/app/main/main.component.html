@@ -16,7 +16,7 @@
   Page {{pageNumberCurent}} of <button mat-raised-button (click)="navigateLast()">{{numberOfPages}}</button>
   <br>
 
-  <div>
+  <!-- <div>
     <button mat-raised-button (click)="navigateFirst()" *ngIf="pageNumberCurent >= 3">0</button>
 
     <span *ngIf="pageNumberCurent - 3 > 0"> <button mat-raised-button> ... </button> </span>
@@ -28,12 +28,12 @@
     </span>
 
     <!-- {{pageNumberCurent}} -->
-    <span *ngIf="numberOfPages - pageNumberCurent > 2">
+    <!-- <span *ngIf="numberOfPages - pageNumberCurent > 2">
       <button mat-raised-button> ... </button>
     </span>
 
     <button mat-raised-button (click)="navigateLast()" [disabled]="pageNumberCurent == numberOfPages">{{numberOfPages}}</button>
-  </div>
+  </div> -->
 
 </div>
 
@@ -57,4 +57,7 @@
       <!-- <componenta-movie-single [movie]="movie"></componenta-movie-single> -->
     </div>
   </div>
+
+
+<app-pagination [nrOfPages]="numberOfPages" [currentPageNumber]="pageNumberCurent" (evenimentulSchimbarePagina)="changePage($event)"></app-pagination>
 </div>

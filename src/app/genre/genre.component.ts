@@ -17,14 +17,14 @@ export class GenreComponent implements OnInit {
 
   moviesFromGenre: Movie[] = [];
   genreSelected: string = "";
-  pageNumberCurrent: any = 0;
+  pageNumberCurrent: any = 0; // !!!
 
 
   // TODO: how can we avoid any[] and specify a type instead
   // ! we cannot use number[] pentru ca '...'
   pageRangeArray: NavigationPage[] = []; // [3,4,5,6,7]
 
-  nrOfMoviesInGenre: number = -1;
+  nrOfMoviesInGenre: number = -1; // !!!
   numberOfPagesInGenre: number = -1;
   dateIncarcatePeGenre: Map<string, any[]> = new Map<string, any[]>();
 
@@ -120,8 +120,8 @@ export class GenreComponent implements OnInit {
 
           this.nrOfMoviesInGenre = listaFilme['numberOfMovies'];
           this.numberOfPagesInGenre = Math.floor(this.nrOfMoviesInGenre / 4) + (this.nrOfMoviesInGenre % 4 != 0 ? 1 : 0) - 1;
-
-
+          
+          this.pageNumberCurrent = page;
           this.pageRangeArray = this.generatePA(page, this.numberOfPagesInGenre);
           // this.pageRangeArray = [page-2, page-1, page, page+1, page+2];  // page-2 .... page + 2
           // this.pageRangeArray = this.pageRangeArray.filter(x => x >= 0).filter(x => x <= this.numberOfPagesInGenre);
@@ -202,6 +202,11 @@ export class GenreComponent implements OnInit {
     // this.setBasicInfo();
 
 
+  }
+
+  test(param: any){
+    console.log('just a test: ', param);
+    this.navigateToPage(param);
   }
 
 }

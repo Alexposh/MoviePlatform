@@ -10,6 +10,11 @@ import { Router } from '@angular/router';
 export class NavigationComponent implements OnInit {
 
   selected_genre:any="";
+  userLoggedIn:any=
+    {
+      name: "",
+      password:""
+    }
 
   pages:any[]=[
     {
@@ -22,6 +27,22 @@ export class NavigationComponent implements OnInit {
     }
   ]
 
+  userRelated:any[]=[
+    {
+      linkPath:"login",
+      linkName: "Login"
+    },
+    {
+      linkPath:"signup",
+      linkName:"Sign up"
+    }
+
+  ]
+
+
+  
+  
+
   genreList:any[]=[];
 
   constructor(private http:HttpClient, private router : Router) { }
@@ -33,7 +54,7 @@ export class NavigationComponent implements OnInit {
     this.router.navigate(['/genres', this.selected_genre]);
   }
   getGenres(){
-    const url = 'http://localhost:8000/movie-genres';
+    const url = 'http://localhost:8000/movie-genres/' + localStorage.getItem('ACCESS_TOKEN');
     return this.http.get<any>(url).subscribe(
       genresList=>{
         this.genreList = genresList;
@@ -48,6 +69,12 @@ export class NavigationComponent implements OnInit {
   search() {
     console.log('searching for: ', this.searchTitle);
     this.router.navigate(['/search-movie', this.searchTitle]);
+    // /search-movie/:search-term
+  }
+
+  loger() {
+    console.log('loging in with username ', this.userLoggedIn.name);
+    this.router.navigate(['/log-in', this.searchTitle]);
     // /search-movie/:search-term
   }
 

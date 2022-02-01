@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row">
+        <div class="card" style="width: 18rem;">
+            <h3>New on the block?</h3>
+            
+        <label for="name">Select a username</label>
+        <input type="text" id="name" name="name" class="form-control"
+            required minlength="4" appForbiddenName="bob"
+            [(ngModel)]="user.username" #name="ngModel">
+
+        <label for="password">Enter a password</label>
+        <input type="password" id="password" name="password" class="form-control"
+                required minlength="8" appForbiddenPassword="1234"
+                [(ngModel)]="user.password" #name="ngModel">
+                            
+        <label for="confirm-password">Confirm your password</label>
+        <input type="password" id="confirm-password" name="confirm-password" class="form-control"
+                required minlength="8" appForbiddenPassword="1234"
+                [(ngModel)]="confirmedPassword.content" #name="ngModel">
+        
+        <button mat-raised-button id="submit" color="warn" (click)="saveUser()">Sign up</button>
+  </div>
+         
+</div>
+</div>
+

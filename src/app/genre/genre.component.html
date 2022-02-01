@@ -20,10 +20,10 @@
       <!-- <componenta-movie-single [movie]="movie"></componenta-movie-single> -->
     </div>
   </div>
-  </div>
+  <!-- </div>
   <div class="navigation">
   <button mat-raised-button (click)="navigateFirst()" [disabled] = "pageNumberCurrent === 0">First page</button> <!--  if the current page is 0 is disabled and   -->
-  <button mat-raised-button *ngIf="pageNumberCurrent > 0 && pageNumberCurrent - 2 > 0">...</button>
+  <!-- <button mat-raised-button *ngIf="pageNumberCurrent > 0 && pageNumberCurrent - 2 > 0">...</button>
   <button mat-raised-button (click)="navigate('prev')" [disabled] = "pageNumberCurrent === 0">Previous page</button> 
   <button mat-raised-button (click)="navigateToPage(pageNumberCurrent-1)" *ngIf="pageNumberCurrent >= 1">{{pageNumberCurrent}}</button>
   <button mat-raised-button color="primary">{{pageNumberCurrent +1}}</button>
@@ -31,11 +31,12 @@
   <button mat-raised-button (click)="navigate('next')" [disabled] = "pageNumberCurrent === numberOfPagesInGenre">Next page</button>
   <button mat-raised-button *ngIf="pageNumberCurrent < numberOfPagesInGenre && pageNumberCurrent +2 < numberOfPagesInGenre">...</button>
   <button mat-raised-button (click)="navigateLast()" [disabled] = "pageNumberCurrent === numberOfPagesInGenre">Last page</button>
-  </div>
- 
+  </div>  -->
+
+<!--  
   <div>
     <button *ngFor="let pra of pageRangeArray" [color]="pra.isCurrent ? 'primary' : ''" [disabled] = "pra.disabled" mat-raised-button (click)="navigateToPage(pra.pageNumber)">{{pra.pageLabel}}</button>
-  </div>
+  </div> -->
   <p>Number of pages: {{ numberOfPagesInGenre }}</p>
   <p>Number of movies in genre: {{ nrOfMoviesInGenre }}</p>
   <button (click)="displayCache()">Display cache</button>
@@ -45,4 +46,5 @@
     <option >Desc</option>
   </select>
 <br>
-  <app-pagination></app-pagination>
+  <app-pagination [nrOfPages]="numberOfPagesInGenre" [currentPageNumber]="pageNumberCurrent" (evenimentulSchimbarePagina)="test($event)"></app-pagination>
+</div>

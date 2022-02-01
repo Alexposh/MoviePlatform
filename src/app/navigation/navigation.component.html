@@ -22,6 +22,9 @@
           <button mat-button (click)="search()">Search</button>
      </div>
 
-     <button mat-button> Sign in</button>
+     <ul>
+          <li *ngFor="let button of userRelated"><a mat-stroked-button [routerLink]="button.linkPath">{{button.linkName}}</a></li>
+
+     </ul>
      <br>
 </div>

@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GenreComponent } from './genre/genre.component';
+import { LoginComponent } from './login/login.component';
 import { MainSearchComponent } from './main-search/main-search.component';
 import { MainComponent } from './main/main.component';
 import { SinglemovieComponent } from './singlemovie/singlemovie.component';
+import { SignupComponent } from './signup/signup.component';  
 
 
 const routes: Routes = [
@@ -18,6 +20,14 @@ const routes: Routes = [
   {
     path: 'main',
     component: MainComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'signup',
+    component: SignupComponent
   },
   {
     path: '',

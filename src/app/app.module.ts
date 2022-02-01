@@ -18,6 +18,8 @@ import { FormsModule } from '@angular/forms';
 import { MainSearchComponent } from './main-search/main-search.component';
 import { GenreComponent } from './genre/genre.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { PaginationComponent } from './pagination/pagination.component';
     NavigationComponent,
     MainSearchComponent,
     GenreComponent,
-    PaginationComponent
+    PaginationComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

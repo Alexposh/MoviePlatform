@@ -1,4 +1,6 @@
+<div class="container featured">
 <div *ngIf="featuredMovie; else loadingMovie">
+    <img [src]="moviePoster" alt="">
     <h2>{{featuredMovie.title}}</h2>
     <p>Original title: {{featuredMovie.title}}</p>
     <span>Realease date: {{featuredMovie.release_date | date: 'yyyy/MM/dd'}}</span> <span>  Runtime: {{featuredMovie.runtime}} </span>
@@ -36,3 +38,32 @@
         Loading still...
     </div>
 </ng-template>
+
+
+<div>
+    <h3>Upload imagine</h3>
+    <input name="imageUrl" type="file" accept="image/*" (change)="handleInputChange($event)" />
+</div>
+
+<div>
+    <h2>TEST</h2>
+    <img [src]="imagineBase64" alt="">
+</div>
+
+<button (click)="saveImage(featuredMovie.movie_id)" >Save Poster</button> <!--- Homework 11.01.2022  // list with features to be added  -- Not done -->
+<!-- 
+    -- add photo - user restrictions
+    -- save photo --||--
+    -- add table  wishlist
+    --  add option to add movie to wishlist/seen/not interested
+
+
+- user login
+- user favorites
+- user seen
+- user wishlist
+- user favorite actors/directors
+- saving blob to Database
+- 403? Method not Allowed?  -->
+
+</div>
