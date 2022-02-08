@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
@@ -54,8 +54,12 @@ export class NavigationComponent implements OnInit {
     this.router.navigate(['/genres', this.selected_genre]);
   }
   getGenres(){
-    const url = 'http://localhost:8000/movie-genres/' + localStorage.getItem('ACCESS_TOKEN');
-    return this.http.get<any>(url).subscribe(
+
+    let headers = new HttpHeaders();
+    let at = localStorage.getItem('ACCESS_TOKEN');
+    headers = headers.set('TokenPentruAcces', at != null ? at : '');
+    const url = 'http://localhost:8000/movie-genres';
+    return this.http.get<any>(url, {headers: headers}).subscribe(
       genresList=>{
         this.genreList = genresList;
         console.log('genres: ', this.genreList);
@@ -86,4 +90,17 @@ export class NavigationComponent implements OnInit {
     this.getGenres();
   }
 
+  signOut(){
+    this.http.delete('http://localhost:8000/signout/'+localStorage.getItem('ACCESS_TOKEN'))
+      .subscribe(
+        rez => {
+          console.log('logout operation successful: ', rez);
+          localStorage.clear();
+    this.router.navigate(['/main']);
+        }
+      );
+    
+    
+    
+  }
 }

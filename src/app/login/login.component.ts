@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -33,6 +34,7 @@ export class LoginComponent implements OnInit {
           if(rez.statusLogin){
             localStorage.setItem('AUTENTIFICARE', 'OK');
             localStorage.setItem('ACCESS_TOKEN', rez.access_token)
+            this.router.navigate(['/main']);
           }else{
             localStorage.setItem('AUTENTIFICARE', 'FAIL');
           }
@@ -42,7 +44,7 @@ export class LoginComponent implements OnInit {
 
   isLoggedIn: boolean = false;
   
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     
@@ -61,6 +63,20 @@ export class LoginComponent implements OnInit {
       
     
     
+  }
+
+  headerExperiments(){
+    console.log('doing me some headers');
+    fetch('http://localhost:8000/test-headers', {
+      method: 'GET',
+      headers: {
+        'Mancare': 'Shaorma fetch'
+      }
+    })
+      .then(date=>date.json())
+      .then(date => {
+        console.log('test header endpoint php zice: ', date);
+      })
   }
 
 }

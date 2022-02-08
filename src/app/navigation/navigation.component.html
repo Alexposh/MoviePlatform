@@ -24,7 +24,7 @@
 
      <ul>
           <li *ngFor="let button of userRelated"><a mat-stroked-button [routerLink]="button.linkPath">{{button.linkName}}</a></li>
-
+          <li (click)="signOut()">Sign Out</li>
      </ul>
      <br>
 </div>
