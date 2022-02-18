@@ -20,6 +20,7 @@ import { GenreComponent } from './genre/genre.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { SignupComponent } from './signup/signup.component';
     GenreComponent,
     PaginationComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

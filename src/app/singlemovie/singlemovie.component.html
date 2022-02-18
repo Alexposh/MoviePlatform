@@ -2,6 +2,14 @@
 <div *ngIf="featuredMovie; else loadingMovie">
     <img [src]="moviePoster" alt="">
     <h2>{{featuredMovie.title}}</h2>
+    <label for="status">Choose an option: </label><br>
+    <select name="sytatus" id="status">
+        <option value="" selected disabled hidden>Choose here</option>
+        <option value="seen">Seen</option>
+        <option value="interested">Want to see it</option>
+        <option value="uninterested">No, thank you!</option>
+
+    </select>
     <p>Original title: {{featuredMovie.title}}</p>
     <span>Realease date: {{featuredMovie.release_date | date: 'yyyy/MM/dd'}}</span> <span>  Runtime: {{featuredMovie.runtime}} </span>
     <p>Rating: {{featuredMovie.vote_average}}/10</p>
@@ -9,15 +17,13 @@
     <p>Description: {{featuredMovie.overview}}</p>
 
     <p>{{featuredMovie.vote_count}} user reviews</p>
-    <span *ngFor="let crew_member of movie_crew" >
-        <p *ngIf="crew_member.job == 'Director'"> Director: {{crew_member.person_name}}</p>
+    <div>Directors:<span *ngFor="let crew_member of movie_crew"> <span *ngIf="crew_member.job == 'Director'">  {{crew_member.person_name}}, </span>
     </span>
-
-    <span *ngFor="let crew_member of movie_crew" >
+</div>
+    <!-- <span *ngFor="let crew_member of movie_crew" >
         <p *ngIf="crew_member.job == 'Writer'"> {{crew_member.job}}: {{crew_member.person_name}}</p>
-    </span>
-    
-    
+    </span> -->
+        
     
     <div>
         Tagline: "{{ featuredMovie.tagline }}"
@@ -50,20 +56,20 @@
     <img [src]="imagineBase64" alt="">
 </div>
 
-<button (click)="saveImage(featuredMovie.movie_id)" >Save Poster</button> <!--- Homework 11.01.2022  // list with features to be added  -- Not done -->
+<button (click)="saveImage(featuredMovie.movie_id)" >Save Poster</button> <!--- Homework 11.01.2022  // list with features to be added   -->
 <!-- 
     -- add photo - user restrictions
-    -- save photo --||--
-    -- add table  wishlist
-    --  add option to add movie to wishlist/seen/not interested
+    -- save photo --||-- -- done
+    -- add tables  wishlist/seen/not interested - done
+    -- add option to add movie to wishlist/seen/not interested 
 
 
-- user login
-- user favorites
-- user seen
-- user wishlist
-- user favorite actors/directors
-- saving blob to Database
-- 403? Method not Allowed?  -->
+- user login - done
+- user favorites --done
+- user seen - done
+- user wishlist - done
+- user favorite actors/directors - done
+- saving blob to Database -- done
+- 403? Method not Allowed?  ---done -->
 
 </div>

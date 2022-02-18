@@ -20,7 +20,7 @@ export class GenreComponent implements OnInit {
   pageNumberCurrent: any = 0; // !!!
 
 
-  // TODO: how can we avoid any[] and specify a type instead
+  
   // ! we cannot use number[] pentru ca '...'
   pageRangeArray: NavigationPage[] = []; // [3,4,5,6,7]
 

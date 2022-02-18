@@ -1,19 +1,12 @@
-<button mat-button (click)='loadMovies()'>Load the movies</button>
+<!-- <button mat-button (click)='loadMovies()'>Load the movies</button> -->
 
-<select mat-select>
-  <option>Page 1</option>
-  <option>Page 2</option>
-  <option>Page 3</option>
-  <!-- exact number of pages that we have -->
-</select>
 
-<!-- TODO: butonul de next ar trebui sa fie disabled daca suntem pe ultima pagina -->
-<!-- TODO: de adaugat paginare si pe genres -->
 
-<button mat-button [disabled]="pageNumberCurent == 0" (click)="navigate('prev')">Previous</button>
-<button mat-button (click)="navigate('next')">Next</button>
+
+<!-- <button mat-button [disabled]="pageNumberCurent == 0" (click)="navigate('prev')">Previous</button>
+<button mat-button (click)="navigate('next')">Next</button> -->
 <div>
-  Page {{pageNumberCurent}} of <button mat-raised-button (click)="navigateLast()">{{numberOfPages}}</button>
+  <!-- Page {{pageNumberCurent}} of <button mat-raised-button (click)="navigateLast()">{{numberOfPages}}</button> -->
   <br>
 
   <!-- <div>

@@ -35,6 +35,10 @@ export class NavigationComponent implements OnInit {
     {
       linkPath:"signup",
       linkName:"Sign up"
+    },
+    {
+      linkPath:"myaccount",
+      linkName:"My Account"
     }
 
   ]
@@ -91,7 +95,11 @@ export class NavigationComponent implements OnInit {
   }
 
   signOut(){
-    this.http.delete('http://localhost:8000/signout/'+localStorage.getItem('ACCESS_TOKEN'))
+    let headers = new HttpHeaders();
+    let currentToken = localStorage.getItem('ACCESS_TOKEN');
+    headers = headers.set('TokenPentruAcces', currentToken != null ? currentToken : '');
+    const url = 'http://localhost:8000/signout';
+    return this.http.delete<any>(url, {headers: headers})
       .subscribe(
         rez => {
           console.log('logout operation successful: ', rez);

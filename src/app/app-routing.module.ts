@@ -6,6 +6,7 @@ import { MainSearchComponent } from './main-search/main-search.component';
 import { MainComponent } from './main/main.component';
 import { SinglemovieComponent } from './singlemovie/singlemovie.component';
 import { SignupComponent } from './signup/signup.component';  
+import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'genres/:selected-genre',
     component: GenreComponent
+  },
+  {
+    path: 'myaccount',
+    component: ProfileComponent
   }
 ];
 
