@@ -1,0 +1,17 @@
+<br>
+
+<div class="container">
+    <div class="row">
+      <div class="card" style="width: 18rem;" *ngFor="let actor of allactors">
+        <div class="card-body">
+          <h2 class="card-title">{{actor.person_name}}</h2>
+          <img src="../../assets/user.png" alt="">
+          <a [routerLink]="['/single-actor', actor.person_id]"><p>More roles from {{actor.person_name}}</p></a>
+        </div>
+        
+    </div>
+    </div>
+  
+  
+  <app-pagination [nrOfPages]="numberOfPages" [currentPageNumber]="pageNumberCurent" (evenimentulSchimbarePagina)="changePage($event)"></app-pagination>
+  </div>

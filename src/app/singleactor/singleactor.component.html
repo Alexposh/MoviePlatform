@@ -1,0 +1,6 @@
+
+<h3>Test</h3>
+
+<ul>
+    <li *ngFor="let movie of moviesPlayedIn">Played<strong> {{movie.character_name}}</strong> in <i>{{movie.title}}</i> <a [routerLink]="['/single-movie', movie.movie_id]"><button mat-button>Read More</button></a></li>
+</ul>

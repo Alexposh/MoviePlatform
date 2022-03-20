@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +10,9 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'movies';
   searchTitle: string = '';
+  
 
-  constructor(private router : Router) {
+  constructor(private router : Router, private loginService: LoginService) {
 
   }
 
@@ -22,5 +24,9 @@ export class AppComponent {
 
   changeSearch(){
     console.log('the search has changed: ', this.searchTitle);
+  }
+
+  loginEventTriggered(){
+    console.log('something happened on login component')
   }
 }

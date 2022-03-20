@@ -3,13 +3,23 @@
     <img [src]="moviePoster" alt="">
     <h2>{{featuredMovie.title}}</h2>
     <label for="status">Choose an option: </label><br>
-    <select name="sytatus" id="status">
-        <option value="" selected disabled hidden>Choose here</option>
-        <option value="seen">Seen</option>
-        <option value="interested">Want to see it</option>
-        <option value="uninterested">No, thank you!</option>
 
-    </select>
+    <mat-form-field appearance="fill">
+        <mat-label>Select</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let opinion of possibleOpinions" value="opinion.opinion_id">{{opinion.opinion}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    
+    <!-- <select name="status" id="status">
+        <option value="" selected disabled hidden>Choose here</option>
+        <option *ngFor="let opinion of possibleOpinions" value="opinion.opinion_id">{{opinion.opinion}}</option>
+
+    </select> -->
+
+    <button>Submit</button>
+    
     <p>Original title: {{featuredMovie.title}}</p>
     <span>Realease date: {{featuredMovie.release_date | date: 'yyyy/MM/dd'}}</span> <span>  Runtime: {{featuredMovie.runtime}} </span>
     <p>Rating: {{featuredMovie.vote_average}}/10</p>

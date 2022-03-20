@@ -67,6 +67,15 @@ getMoviesOpinions(user:number,opinion:number):void{
 
   ngOnInit(): void {
     this.identifyUser();
+    this.http.get('http://localhost:8000/test-echo')
+      .subscribe(
+        rez => {
+          console.log('rezultat: ', rez)
+        },
+        err => {
+          console.log('eroare: ', err);
+        }
+      )
   }
 
 }

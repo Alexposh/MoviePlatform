@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-signup',
@@ -33,6 +34,15 @@ export class SignupComponent implements OnInit {
       "Content-Type":"application/json"
     })}).subscribe(
       user=>{
+        console.log('raspunsul: ', user);
+        this.loginService.set('AUTENTIFICARE', 'OK');
+        this.loginService.set('ACCESS_TOKEN', user.newToken);
+        // this.router.navigate(['/main']);
+        // no token
+        // this.loginService.loginServer(bodyRequest.username, bodyRequest.password)
+        //   .subscribe(loginResult => {
+
+        //   });
         // this.moviePoster = this.imagineBase64;
         console.log('contul salvat pentru userul : ',  user.username, ' cu parola ', user.password);
         this.user.password = "";
@@ -42,7 +52,7 @@ export class SignupComponent implements OnInit {
   
 
   }
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private loginService: LoginService) { }
 
   ngOnInit(): void {
     this.user = new FormGroup({

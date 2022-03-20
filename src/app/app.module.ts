@@ -14,13 +14,17 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { SinglemovieComponent } from './singlemovie/singlemovie.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainSearchComponent } from './main-search/main-search.component';
 import { GenreComponent } from './genre/genre.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ProfileComponent } from './profile/profile.component';
+import { MoviesComponent } from './movies/movies.component';
+import { ArtistsComponent } from './artists/artists.component';
+import { SingleactorComponent } from './singleactor/singleactor.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,10 @@ import { ProfileComponent } from './profile/profile.component';
     PaginationComponent,
     LoginComponent,
     SignupComponent,
-    ProfileComponent
+    ProfileComponent,
+    MoviesComponent,
+    ArtistsComponent,
+    SingleactorComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +53,9 @@ import { ProfileComponent } from './profile/profile.component';
     MatSelectModule,
     MatCardModule,
     MatGridListModule,
-    FormsModule
+    FormsModule,
+    MatSnackBarModule,
+    ReactiveFormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

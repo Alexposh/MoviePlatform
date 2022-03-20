@@ -7,6 +7,9 @@ import { MainComponent } from './main/main.component';
 import { SinglemovieComponent } from './singlemovie/singlemovie.component';
 import { SignupComponent } from './signup/signup.component';  
 import { ProfileComponent } from './profile/profile.component';
+import { MoviesComponent } from './movies/movies.component'
+import { ArtistsComponent } from './artists/artists.component';
+import { SingleactorComponent } from './singleactor/singleactor.component';
 
 
 const routes: Routes = [
@@ -15,12 +18,24 @@ const routes: Routes = [
     component: SinglemovieComponent
   },
   {
+    path: 'single-actor/:person-id',
+    component: SingleactorComponent
+  },
+  {
     path: 'search-movie/:search-term',
     component: MainSearchComponent
   },
   {
     path: 'main',
     component: MainComponent
+  },
+  {
+    path: 'movies',
+    component: MoviesComponent
+  },
+  {
+    path: 'artists',
+    component: ArtistsComponent
   },
   {
     path: 'login',

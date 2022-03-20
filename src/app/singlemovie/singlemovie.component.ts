@@ -20,6 +20,7 @@ export class SinglemovieComponent implements OnInit {
   movie_crew:any[]=[];
   castShown:boolean=false;
   moviePoster: any;
+  possibleOpinions:any[]=[];
 
   imagineBase64 : string | undefined = '';
   textImagine:string | undefined="";
@@ -42,6 +43,16 @@ export class SinglemovieComponent implements OnInit {
       movieCast=>{
         this.cast_members = movieCast;
         console.log('cast: ', movieCast);
+      }
+    );
+  }
+
+  getPossibleOpinions(){
+    const url = 'http://localhost:8000/possible-opinions';
+    return this.http.get<any>(url).subscribe(
+      foundOpinions=>{
+        this.possibleOpinions = foundOpinions;
+        console.log('opinions: ', foundOpinions);
       }
     );
   }
@@ -77,6 +88,7 @@ export class SinglemovieComponent implements OnInit {
       this.loadCast(this.idCurrentMovie);
       this.loadCrew(this.idCurrentMovie);
       this.loadImage(this.idCurrentMovie);
+      this.getPossibleOpinions();
     });
 
 
