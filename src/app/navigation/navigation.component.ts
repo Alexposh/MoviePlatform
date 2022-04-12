@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgIterable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable, of } from 'rxjs';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-navigation',
@@ -65,6 +67,26 @@ export class NavigationComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router, private loginService: LoginService,
     private _snackBar: MatSnackBar) { }
 
+  searchCriteriaField: string[] = ["All", "Movies", "Actors"];
+  searchCriteriaFieldSelected: string = '';
+  searchTitle: string = '';
+  //DDDisplayed:NgIterable<any> | null | undefined;
+
+  filteredOptions: Observable<any[]> = of([]);
+  test: string[] = ['1', 'doi', 'trei']
+  myControl = new FormControl();
+  accessToken: any = localStorage.getItem('ACCESS_TOKEN');
+
+  // optionItems : any[] = [{id: 10, name: 'optiunea 1'}, {id: 20, name: 'optiunea 2'}];
+  //   optionItemSelectat: any;
+  // schimbareTest(){
+  //   console.log('ai selectat ceva: ', this.optionItemSelectat);
+  // }
+
+  setCriteriaField(): void {
+    console.log('ai selectat ceva: ', this.searchCriteriaFieldSelected);
+  }
+
 
 
   afterSelect() {
@@ -87,10 +109,11 @@ export class NavigationComponent implements OnInit {
 
   }
 
-  searchTitle: string = '';
+
 
   search() {
     console.log('searching for: ', this.searchTitle);
+    // TODO: if(actor | movie)
     this.router.navigate(['/search-movie', this.searchTitle]);
     // /search-movie/:search-term
   }
@@ -103,10 +126,37 @@ export class NavigationComponent implements OnInit {
   // }
 
   changeSearch() {
-    console.log('the search has changed: ', this.searchTitle);
+    if (this.searchCriteriaFieldSelected) {
+      if (this.searchTitle.length <= 3) {
+        console.log("too short criteria");
+        return;
+      }
+      console.log("should search for: ", this.searchTitle);
+
+      console.log('should search WITH AUTOCOMPLETE');
+      // TODO: get values for searchTitle 
+      const url = `http://localhost:8000/search/${this.searchCriteriaFieldSelected}/${this.searchTitle}`;
+          this.http.get<any[]>(url).subscribe(
+            DropDownOptions => {
+              // ['film x', 'film y'];
+            this.filteredOptions = of(DropDownOptions);
+            console.log('options shown to the user: ', DropDownOptions);
+            }
+        );
+      console.log('in category: ', this.searchCriteriaFieldSelected);
+      // replace the old observable with a new one (GET from index.php)
+      // this.filteredOptions = this.http.get<string[]>("/search/{"+this.searchCriteriaFieldSelected+"}/{"+this.searchTitle+"}");
+    }
+
+
   }
 
   ngOnInit(): void {
+    this.accessToken = localStorage.getItem('ACCESS_TOKEN');
+    if(this.accessToken){
+      this.someoneLogedIn=true;
+      console.log('este cineva logat?: ', this.someoneLogedIn);
+    }
     this.loginService.changes$.subscribe(rez => {
       console.log('modificari local storage:', rez);
       if (localStorage.getItem('ACCESS_TOKEN')) {
@@ -117,8 +167,8 @@ export class NavigationComponent implements OnInit {
     });
     console.log('****NG ON INIT NAVIGATION****');
     this.getGenres();
-    let accessToken = localStorage.getItem('ACCESS_TOKEN');
-    console.log(accessToken);
+    console.log(this.accessToken);
+    // console.log('este cineva logat?: ', this.someoneLogedIn);
   }
 
   signOut() {
@@ -144,9 +194,21 @@ export class NavigationComponent implements OnInit {
 
 
   }
-  accessToken: any = localStorage.getItem('ACCESS_TOKEN');
+  
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action);
+  }
+  clickOption(option: any){
+    // check if it should go to the actor or movie page (component) - TODO 01.04.2022 - Done
+    
+    // this.router.navigate(['/single-movie', option.id]);
+
+    if(option.type_of=="movie"){
+      this.router.navigate(['/single-movie/', option.id]);
+    }
+    if(option.type_of=="actor"){
+      this.router.navigate(['/single-actor/', option.id]);
+    }
   }
 }

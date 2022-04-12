@@ -16,9 +16,57 @@
      </mat-form-field>
 
 
+     <!-- <div>
+          <select (change)="schimbareTest()" [(ngModel)]="optionItemSelectat">
+               <option *ngFor="let op of optionItems" [ngValue]="op">{{op.name}}</option>
+          </select>
+     </div> -->
+
      <div>
           <!-- Search should be active only after 3 keys have been pressed -->
-          <input type="text" placeholder="Title search..." [(ngModel)]="searchTitle" (keyup)="changeSearch()">
+          <select (change)="setCriteriaField()" [(ngModel)]="searchCriteriaFieldSelected">
+               <option *ngFor="let criteria of searchCriteriaField" [ngValue]="criteria">{{criteria}}</option>
+          </select>
+
+          <mat-form-field class="example-full-width" appearance="fill">
+               <mat-label>Search here...</mat-label>
+               <input (keyup)="changeSearch()" type="text"
+                      [placeholder]="'Search ' + searchCriteriaFieldSelected"
+                      aria-label="Search"
+                      matInput
+                      [formControl]="myControl"
+                      [matAutocomplete]="auto"
+                      [(ngModel)]="searchTitle">
+                      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                         <mat-option (click)="clickOption(option)" *ngFor="let option of filteredOptions | async" [value]="option.result">
+                                        {{option.result}}
+                         </mat-option>
+                    </mat-autocomplete>
+               </mat-form-field>
+
+
+          <!-- <input type="text" placeholder="Title search..." [(ngModel)]="searchTitle" (keyup)="changeSearch()"> -->
+          <!-- <option *ngFor="let ddoption of filteredOptions | async" [ngValue]="ddoption">{{ddoption.title}}</option> -->
+          
+          
+          
+          
+          <!-- <mat-form-field class="example-full-width" appearance="fill">
+               <mat-label>Number</mat-label>
+               <input type="text"
+                      placeholder="Pick one"
+                      aria-label="Number"
+                      matInput
+                      [formControl]="myControl"
+                      [matAutocomplete]="auto"
+                      [(ngModel)]="searchTitle">
+               <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                 <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                   {{option.title}}
+                 </mat-option>
+               </mat-autocomplete>
+             </mat-form-field> -->
+
           <button mat-button (click)="search()">Search</button>
      </div>
 

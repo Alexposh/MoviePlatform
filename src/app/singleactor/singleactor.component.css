@@ -1,0 +1,14 @@
+.container{
+    margin:3% auto;
+    background-color: rgb(243, 238, 247);
+   }
+
+img{
+    margin:auto;
+}
+
+.list li{
+    list-style-type: none;
+    margin:auto;
+}
+   

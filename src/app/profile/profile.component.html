@@ -4,7 +4,7 @@
     <img src="../../assets/user.png" alt=""><hr>
 
     <!-- <button (click)="identifyUser()">Identify user</button> -->
-    <button (click)="getMoviesOpinions(userLoggedInId,1)">Movies I like:</button>
+    <button (click)="getMoviesOpinions(userLoggedInId,1)">Show Movies I like:</button>
 <!-- <h4>Movies I like: </h4> -->
 <div class="row">
     <div class="card" style="width: 18rem;" *ngFor="let movie of likedMovies">
@@ -55,19 +55,29 @@
 
 <hr>
 <h4>My favourite actors: </h4>
-<ul>
-    <li>Cristoph Walz<a href=""> See his movies</a></li>
-    <li>Leonardo DiCaprio<a href=""> See his movies</a></li>
-    <li>Brad Pitt<a href=""> See his movies</a></li>
-</ul> 
-<button>See all</button>
+<button (click)="getArtistOpinions('actor')">Show Actors I like:</button>
+<!-- <h4>Movies I like: </h4> -->
+<div class="row">
+  <div class="card" style="width: 18rem;" *ngFor="let actor of likedActors">
+    <div class="card-body">
+      <h2 class="card-title">{{actor.person_name}}</h2>
+      <img src="../../assets/user.png" alt="">
+      <a [routerLink]="['/single-actor', actor.person_id]"><p>More roles from {{actor.person_name}}</p></a>
+    </div>
+  </div>
+</div>
 <hr>
 <h4>My favourite directors: </h4>
-<ul>
-    <li>Quentin Tarantino<a href=""> See his movies</a></li>
-    <li>Cohen Brothers<a href=""> See their movies</a></li>
-    <li>Martin Scorseze<a href=""> See his movies</a></li>
-</ul> 
-<button>See all</button>
+<button (click)="getArtistOpinions('director')">Show Directors I like:</button>
+<!-- <h4>Movies I like: </h4> -->
+<div class="row">
+  <div class="card" style="width: 18rem;" *ngFor="let director of likedDirectors">
+    <div class="card-body">
+      <h2 class="card-title">{{director.person_name}}</h2>
+      <img src="../../assets/user.png" alt="">
+      <a [routerLink]="['/single-actor', director.person_id]"><p>More roles from {{director.person_name}}</p></a>
+    </div>
+  </div>
+</div>
 
 </div>

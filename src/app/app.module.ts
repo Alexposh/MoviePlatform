@@ -25,6 +25,8 @@ import { MoviesComponent } from './movies/movies.component';
 import { ArtistsComponent } from './artists/artists.component';
 import { SingleactorComponent } from './singleactor/singleactor.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatGridListModule,
     FormsModule,
     MatSnackBarModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,28 @@
+<div class="container">
 
-<h3>Test</h3>
 
-<ul>
-    <li *ngFor="let movie of moviesPlayedIn">Played<strong> {{movie.character_name}}</strong> in <i>{{movie.title}}</i> <a [routerLink]="['/single-movie', movie.movie_id]"><button mat-button>Read More</button></a></li>
-</ul>
+<div class="basic">
+    <img src="../../assets/user.png" alt="">
+    <!-- <button (click)="addAsLiked('actor')">I like him as an actor</button>
+    <button>I like him/her as a director</button> -->
+</div>
+<h2>He/She played in these movies:</h2>
+<div class="list">
+    <ul>
+        <li *ngFor="let movie of moviesPlayedIn">Played<strong> {{movie.character_name}}</strong> in <i>{{movie.title}}</i> <a [routerLink]="['/single-movie', movie.movie_id]"><button mat-button>Read More</button></a></li>
+    </ul>
+    <button (click)="addAsLiked('actor')">I like his/hers acting</button>
+</div>
+
+
+<div class="list" *ngIf="numberOfMoviesDirected > 0; else didNotDirect">
+    <h2>Also directed these movies:</h2>
+    <ul>
+        <li *ngFor="let movie of moviesDirected">Directed <strong> {{movie.title}}</strong> released on <i>{{movie.release_date}}</i> <a [routerLink]="['/single-movie', movie.movie_id]"><button mat-button>Read More</button></a></li>
+    </ul>
+    <button (click)="addAsLiked('director')">I like his/hers directing</button>
+</div>
+
+<ng-template #didNotDirect><h4>No Movies directed</h4></ng-template>
+
+</div>
