@@ -4,12 +4,12 @@
     <img src="../../assets/user.png" alt=""><hr>
 
     <!-- <button (click)="identifyUser()">Identify user</button> -->
-    <button (click)="getMoviesOpinions(userLoggedInId,1)">Show Movies I like:</button>
+    <button (click)="getMoviesOpinions(1)">Show Movies I like:</button>
 <!-- <h4>Movies I like: </h4> -->
 <div class="row">
     <div class="card" style="width: 18rem;" *ngFor="let movie of likedMovies">
       <div class="card-body">
-        <h2 class="card-title">{{movie.title}}</h2>
+        <h2 class="card-title">{{movie.title}}</h2> 
         <p class="card-text">{{movie.overview}}</p>
       </div>
       <div class="card-body" *ngIf="movie.homepage">
@@ -22,7 +22,7 @@
 
 <hr>
 
-<button (click)="getMoviesOpinions(userLoggedInId,2)">Movies I want to see:</button>
+<button (click)="getMoviesOpinions(2)">Movies I want to see:</button>
 <div class="row">
     <div class="card" style="width: 18rem;" *ngFor="let movie of wishlistMovies">
       <div class="card-body">
@@ -38,7 +38,7 @@
 
 <hr>
 
-<button (click)="getMoviesOpinions(userLoggedInId,3)">Movies I hate:</button>
+<button (click)="getMoviesOpinions(3)">Movies I hate:</button>
 <div class="row">
     <div class="card" style="width: 18rem;" *ngFor="let movie of hatedMovies">
       <div class="card-body">
@@ -55,9 +55,10 @@
 
 <hr>
 <h4>My favourite actors: </h4>
-<button (click)="getArtistOpinions('actor')">Show Actors I like:</button>
+<button (click)="getArtistOpinions('actor')">Actors I like:</button>
+<app-people peopleJob="actor"></app-people>
 <!-- <h4>Movies I like: </h4> -->
-<div class="row">
+<!-- <div class="row">
   <div class="card" style="width: 18rem;" *ngFor="let actor of likedActors">
     <div class="card-body">
       <h2 class="card-title">{{actor.person_name}}</h2>
@@ -65,12 +66,14 @@
       <a [routerLink]="['/single-actor', actor.person_id]"><p>More roles from {{actor.person_name}}</p></a>
     </div>
   </div>
-</div>
+</div> -->
 <hr>
+
 <h4>My favourite directors: </h4>
-<button (click)="getArtistOpinions('director')">Show Directors I like:</button>
+<button (click)="getArtistOpinions('director')">Directors I like:</button>
+<app-people peopleJob="Director"></app-people>
 <!-- <h4>Movies I like: </h4> -->
-<div class="row">
+<!-- <div class="row">
   <div class="card" style="width: 18rem;" *ngFor="let director of likedDirectors">
     <div class="card-body">
       <h2 class="card-title">{{director.person_name}}</h2>
@@ -78,6 +81,13 @@
       <a [routerLink]="['/single-actor', director.person_id]"><p>More roles from {{director.person_name}}</p></a>
     </div>
   </div>
-</div>
+</div> -->
 
 </div>
+
+<h4>All People added with 'All' as parameter</h4>
+<app-people peopleJob="all"></app-people>
+<h4>Only actors added with 'actor' as parameter</h4>
+<app-people peopleJob="actor" [filtered]=true></app-people>
+<h4>Only directors added with 'Director' as parameter</h4>
+<app-people peopleJob="Director" [filtered]=false></app-people>

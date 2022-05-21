@@ -2,9 +2,19 @@
 
 
 <div class="basic">
-    <img src="../../assets/user.png" alt="">
-    <!-- <button (click)="addAsLiked('actor')">I like him as an actor</button>
-    <button>I like him/her as a director</button> -->
+    <img [src]="artistPhoto" alt="">
+     
+     <div>
+        <h3>Add photo</h3>
+        <button (click)="saveImage(artistInformation.person_id)">Save Poster</button>
+     </div>
+     
+     <div>
+        <h3>Save photo</h3>
+        <input name="imageUrl" type="file" accept="image/*"(change)="handleInputChange($event)" /> 
+        
+    </div>
+
 </div>
 <h2>He/She played in these movies:</h2>
 <div class="list">

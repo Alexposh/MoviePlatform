@@ -10,6 +10,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { MoviesComponent } from './movies/movies.component'
 import { ArtistsComponent } from './artists/artists.component';
 import { SingleactorComponent } from './singleactor/singleactor.component';
+import { PeopleComponent } from './people/people.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 
 const routes: Routes = [
@@ -26,8 +28,8 @@ const routes: Routes = [
     component: MainSearchComponent
   },
   {
-    path: 'main',
-    component: MainComponent
+    path: 'homepage',
+    component: HomepageComponent
   },
   {
     path: 'movies',
@@ -36,6 +38,10 @@ const routes: Routes = [
   {
     path: 'artists',
     component: ArtistsComponent
+  },
+  {
+    path: 'directors',
+    component: PeopleComponent
   },
   {
     path: 'login',

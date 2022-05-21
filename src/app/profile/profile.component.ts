@@ -33,13 +33,17 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  getMoviesOpinions(user: number, opinion: number): void {
+  getMoviesOpinions(opinion: number): void {
 
     console.log('loading movies for user ' + this.userLoggedInId);
 
-    const url = 'http://localhost:8000/movies-opinions/' + this.userLoggedInId + '/' + opinion;
-
-    this.http.get<any>(url).subscribe(
+    const url = 'http://localhost:8000/movies-opinions/'+ opinion;
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    this.http.get<any>(url, {
+      headers: new HttpHeaders({
+        "TokenPentruAcces": (token ? token : '')
+      })
+    }).subscribe(
       listaFilme => {
         if (opinion == 1) {
           this.likedMovies = listaFilme;

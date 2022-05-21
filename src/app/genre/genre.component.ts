@@ -123,18 +123,7 @@ export class GenreComponent implements OnInit {
           
           this.pageNumberCurrent = page;
           this.pageRangeArray = this.generatePA(page, this.numberOfPagesInGenre);
-          // this.pageRangeArray = [page-2, page-1, page, page+1, page+2];  // page-2 .... page + 2
-          // this.pageRangeArray = this.pageRangeArray.filter(x => x >= 0).filter(x => x <= this.numberOfPagesInGenre);
-          // if(page > 3){
-          //   this.pageRangeArray = ['...'].concat(this.pageRangeArray);
-          //   this.pageRangeArray = [0].concat(this.pageRangeArray);
-          // }
-          // this.pageRangeArray.push(this.numberOfPagesInGenre);
-
-          // this.dateIncarcatePeGenre.set(this.genreSelected+'-'+this.pageNumberCurrent, listaFilme.currentPageItems);
-          // currentPageItems
-
-
+          
         }
       );
     }

@@ -43,7 +43,7 @@
 <button *ngIf="castShown" (click)="hideCast()">Hide Cast</button>
     <div class="cast" *ngIf="castShown">
         <ul>
-            <li *ngFor="let actor of cast_members">{{actor.person_name}} playing {{ actor.character_name }}</li>
+            <li *ngFor="let actor of cast_members">{{actor.person_name  | unicodeFriendly}} playing {{ actor.character_name  | unicodeFriendly}}</li>
         </ul>
     </div>
 </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { UnicodeFriendlyPipe } from '../unicode-friendly.pipe';
 @Component({
   selector: 'app-artists',
   templateUrl: './artists.component.html',
@@ -13,6 +13,7 @@ export class ArtistsComponent implements OnInit {
   numberOfPages: number = -1;
   pagesBefore: number[] = [];
   pagesAfter: number[] = [];
+  artistsData:any[]=[];
 
   constructor(private http: HttpClient) { }
 
@@ -51,16 +52,30 @@ export class ArtistsComponent implements OnInit {
     console.log('daca exista deja: ', dacaExistaDeja);
     if (dacaExistaDeja) {       
       this.allactors = this.dateIncarcatePePagini.get(pageNumber) || [];
+      console.log(this.artistsData);
     } else {
       this.http.get<any[]>(url).subscribe(
         listaActori => {
           this.allactors = listaActori;
-          console.log(this.allactors);
+          this.allactors.forEach(actor => {
+            console.log('should load photo of actor with name: ', actor.person_id);
+            const getPhotoUrl = "http://localhost:8000/artist-photo-load/" + actor.person_id;
+            this.http.get<any[]>(getPhotoUrl).subscribe(
+              photoContents=>{
+                actor['photo']=photoContents;
+              }
+            )        
+            
+          });
+          console.log('actori incarcati pe pagina: ',this.allactors);
           this.dateIncarcatePePagini.set(pageNumber, listaActori);
+          
         }
       );
     }
   }
+
+ 
 
   loadActors() {
     const url = 'http://localhost:8000/actors-list/' + this.pageNumberCurent;
@@ -68,8 +83,7 @@ export class ArtistsComponent implements OnInit {
       listaActori => {
 
         this.allactors = this.allactors.concat(listaActori);
-         console.log(this.allactors);
-         this.dateIncarcatePePagini.set(this.pageNumberCurent, listaActori);
+        this.dateIncarcatePePagini.set(this.pageNumberCurent, listaActori);
 
       }
     );
@@ -79,6 +93,7 @@ export class ArtistsComponent implements OnInit {
     console.log('navigating to page: ', page);
     this.pageNumberCurent = page;
     this.loadActorsForPage(this.pageNumberCurent);
+    console.log('datele deja incarcate: ', this.dateIncarcatePePagini);
   }
 
   navigateLast() {
@@ -107,7 +122,7 @@ export class ArtistsComponent implements OnInit {
         }
       );
 
-    this.loadActors();
+    this.loadActorsForPage(0);
         
   }
 

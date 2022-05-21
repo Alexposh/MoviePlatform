@@ -27,6 +27,10 @@ import { SingleactorComponent } from './singleactor/singleactor.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
+import { PeopleComponent } from './people/people.component';
+import { NewmoviesComponent } from './newmovies/newmovies.component';
+import { HomepageComponent } from './homepage/homepage.component';
+import { UnicodeFriendlyPipe } from './unicode-friendly.pipe';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,11 @@ import { MatInputModule } from '@angular/material/input';
     ProfileComponent,
     MoviesComponent,
     ArtistsComponent,
-    SingleactorComponent
+    SingleactorComponent,
+    PeopleComponent,
+    NewmoviesComponent,
+    HomepageComponent,
+    UnicodeFriendlyPipe
   ],
   imports: [
     BrowserModule,

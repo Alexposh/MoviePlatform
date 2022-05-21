@@ -4,8 +4,8 @@
     <div class="row">
       <div class="card" style="width: 18rem;" *ngFor="let actor of allactors">
         <div class="card-body">
-          <h2 class="card-title">{{actor.person_name}}</h2>
-          <img src="../../assets/user.png" alt="">
+          <h2 class="card-title">{{actor.person_name | unicodeFriendly}}</h2>
+          <img *ngIf="actor.photo" [src]="actor.photo.content">
           <a [routerLink]="['/single-actor', actor.person_id]"><p>More roles from {{actor.person_name}}</p></a>
         </div>
         
@@ -15,3 +15,8 @@
   
   <app-pagination [nrOfPages]="numberOfPages" [currentPageNumber]="pageNumberCurent" (evenimentulSchimbarePagina)="changePage($event)"></app-pagination>
   </div>
+<hr>
+  <app-people peopleJob="actor" [filtered] = "false"></app-people>
+  <!-- <app-people peopleJob="actor" [filtered] = "true"></app-people>
+    <app-people peopleJob="Producer" [filtered] = "false"></app-people>
+  <app-people peopleJob="Director" [filtered] = "true"></app-people> -->

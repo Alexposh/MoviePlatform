@@ -23,7 +23,7 @@ export class NavigationComponent implements OnInit {
 
   pages: any[] = [
     {
-      pagePath: "main",
+      pagePath: "homepage",
       pageName: "Home"
     },
     {
@@ -33,6 +33,10 @@ export class NavigationComponent implements OnInit {
     {
       pagePath: "artists",
       pageName: "Artists"
+    },
+    {
+      pagePath: "directors",
+      pageName: "Directors"
     },
     {
       pagePath: "genres/" + this.selected_genre,
