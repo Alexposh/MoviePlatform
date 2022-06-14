@@ -56,7 +56,7 @@
 <hr>
 <h4>My favourite actors: </h4>
 <button (click)="getArtistOpinions('actor')">Actors I like:</button>
-<app-people peopleJob="actor"></app-people>
+<app-people peopleJob="actor" [filtered]=true></app-people>
 <!-- <h4>Movies I like: </h4> -->
 <!-- <div class="row">
   <div class="card" style="width: 18rem;" *ngFor="let actor of likedActors">
@@ -71,7 +71,7 @@
 
 <h4>My favourite directors: </h4>
 <button (click)="getArtistOpinions('director')">Directors I like:</button>
-<app-people peopleJob="Director"></app-people>
+<app-people peopleJob="Director" [filtered]=true></app-people>
 <!-- <h4>Movies I like: </h4> -->
 <!-- <div class="row">
   <div class="card" style="width: 18rem;" *ngFor="let director of likedDirectors">
@@ -85,7 +85,7 @@
 
 </div>
 
-
+<!-- 
 <h4>Filtered actors</h4>
 <app-people peopleJob="actor" [filtered]=true></app-people>
 <h4>Unfiltered actors</h4>
@@ -93,4 +93,4 @@
 <h4>Filtered Directors</h4>
 <app-people peopleJob="Director" [filtered]=true></app-people>
 <h4>Unfiltered Directors</h4>
-<app-people peopleJob="Director" [filtered]=false></app-people>
+<app-people peopleJob="Director" [filtered]=false></app-people> -->

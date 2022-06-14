@@ -37,6 +37,9 @@ export class ProfileComponent implements OnInit {
 
     console.log('loading movies for user ' + this.userLoggedInId);
 
+    // const url = 'http://localhost:8000/movies-opinions/'+ opinion + '/' + uid;
+    // http://localhost:8000/movies-opinions/1/30
+    // http://localhost:8000/movies-opinions/1/69
     const url = 'http://localhost:8000/movies-opinions/'+ opinion;
     const token = localStorage.getItem("ACCESS_TOKEN");
     this.http.get<any>(url, {

@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Movie } from '../models/movie';
 import { NavigationPage } from '../models/navigation.page';
 import { MovieSinopsysDialogComponent } from '../movie-sinopsys-dialog/movie-sinopsys-dialog.component';
-
+import { environment } from 'src/environments/environment';
 
 export interface DialogData {
   animal: 'panda' | 'unicorn' | 'lion';
@@ -85,7 +85,7 @@ export class NewmoviesComponent implements OnInit {
   // }
 
   loadMoviesForPage(pageNumber: number) {
-    const url = 'http://localhost:8000/movies-in-genre-by-genre-id-extra-details/' + (this.category ? this.category.genre_id : '-1') + '/' + pageNumber;
+    const url = environment.serverContextPath + '/movies-in-genre-by-genre-id-extra-details/' + (this.category ? this.category.genre_id : '-1') + '/' + pageNumber;
     let dacaExistaDeja = this.dateIncarcatePePagini.has(pageNumber);
     // let obiect = {
     //   nrPagini: 30,
