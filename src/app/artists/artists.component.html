@@ -1,4 +1,4 @@
-<br>
+<!-- <br>
 
 <div class="container">
     <div class="row">
@@ -6,7 +6,7 @@
         <div class="card-body">
           <h2 class="card-title">{{actor.person_name | unicodeFriendly}}</h2>
           <img *ngIf="actor.photo" [src]="actor.photo.content">
-          <a [routerLink]="['/single-actor', actor.person_id]"><p>More roles from {{actor.person_name}}</p></a>
+          <a [routerLink]="['/single-actor', actor.person_id]"><p>More roles from {{actor.person_name | unicodeFriendly}}</p></a>
         </div>
         
     </div>
@@ -15,8 +15,15 @@
   
   <app-pagination [nrOfPages]="numberOfPages" [currentPageNumber]="pageNumberCurent" (evenimentulSchimbarePagina)="changePage($event)"></app-pagination>
   </div>
-<hr>
+<hr> -->
+<h4>Filtered Actors</h4>
+<div>
+  <app-people peopleJob="actor" [filtered] = "true"></app-people>
+</div>
+<h4>Uniltered Actors</h4>
+<div>
   <app-people peopleJob="actor" [filtered] = "false"></app-people>
+</div>
   <!-- <app-people peopleJob="actor" [filtered] = "true"></app-people>
     <app-people peopleJob="Producer" [filtered] = "false"></app-people>
   <app-people peopleJob="Director" [filtered] = "true"></app-people> -->

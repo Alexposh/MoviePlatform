@@ -1,0 +1,15 @@
+.front-image{
+    width:250px;
+    height:250px;
+    object-fit:cover;
+    border-radius:4px;
+  }
+
+  .card{
+    margin:10px;
+  }
+
+  button{
+      font-size: 16px;
+      margin: 5px;
+  }

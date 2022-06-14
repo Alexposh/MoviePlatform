@@ -1,9 +1,10 @@
 <!-- <p>homepage works!</p> -->
 <div class="container">
      <div class="row"  *ngFor="let genre of genreList"> 
-          <div class="card" style="width: 18rem;">
-               <h3>{{genre.genre_name}}</h3>
-               <app-newmovies catego>     </app-newmovies>
+          <div class="categoryDivided">
+               <h2>{{genre.genre_name}}</h2>
+               <!-- <app-genre [genreSelected]=genre.genre_name></app-genre> -->
+               <app-newmovies [category]=genre></app-newmovies>
                <!-- <app-pagination [nrOfPages]="numberOfPages" [currentPageNumber]="pageNumberCurent" (evenimentulSchimbarePagina)="changePage($event)"></app-pagination> -->
           </div>
         

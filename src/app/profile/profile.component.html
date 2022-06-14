@@ -85,9 +85,12 @@
 
 </div>
 
-<h4>All People added with 'All' as parameter</h4>
-<app-people peopleJob="all"></app-people>
-<h4>Only actors added with 'actor' as parameter</h4>
+
+<h4>Filtered actors</h4>
 <app-people peopleJob="actor" [filtered]=true></app-people>
-<h4>Only directors added with 'Director' as parameter</h4>
+<h4>Unfiltered actors</h4>
+<app-people peopleJob="actor" [filtered]=false></app-people>
+<h4>Filtered Directors</h4>
+<app-people peopleJob="Director" [filtered]=true></app-people>
+<h4>Unfiltered Directors</h4>
 <app-people peopleJob="Director" [filtered]=false></app-people>

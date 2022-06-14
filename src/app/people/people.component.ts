@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class PeopleComponent implements OnInit {
   
-  @Input() peopleJob :string = "Director" ;
+  @Input() peopleJob :string = "";
   allPeople:any[]=[];
   allPeopleOnPage:any[]=[];  
   @Output() evenimentulSchimbarePagina : EventEmitter<any> = new EventEmitter();
@@ -41,23 +41,24 @@ export class PeopleComponent implements OnInit {
     if (dacaExistaDeja) {       
       this.allPeopleOnPage = this.dateIncarcatePePagini.get(pageNumber) || [];
       } else {
+        console.log('filtered: ', this.filtered);
       this.http.get<any[]>(url, {
         headers: new HttpHeaders({
           "PeopleJob": (peopleJob),
-          "TokenPentruAcces": (token ? token : ''),
+          "TokenPentruAcces": this.filtered ?  (token ? token : '') : '',
           "filtered": ''+this.filtered
         })
       }).subscribe(
         listaPeopleOnPage => {
           this.allPeopleOnPage = listaPeopleOnPage;
           this.allPeopleOnPage.forEach(person => {
-            console.log('should load photo of actor with id: ', person.person_name);
+            console.log('should load photo of person with id: ', person.person_name);
             const getPhotoUrl = "http://localhost:8000/artist-photo-load/" + person.person_id;
-            // this.http.get<any[]>(getPhotoUrl).subscribe(
-            //   photoContents=>{
-            //     person['photo']=photoContents;
-            //   }
-            // )        
+            this.http.get<any[]>(getPhotoUrl).subscribe(
+              photoContents=>{
+                person['photo']=photoContents;
+              }
+            ) 
             
           });
           console.log('persoane incarcate pe pagina: ',this.allPeopleOnPage);
@@ -71,25 +72,16 @@ export class PeopleComponent implements OnInit {
   loadPeople(peopleJob:string) {
     const url = 'http://localhost:8000/people-list';
     const token = localStorage.getItem("ACCESS_TOKEN");
+    console.log('filtered: ', this.filtered);
     return this.http.get<any[]>(url, {
       headers: new HttpHeaders({
         "PeopleJob": (peopleJob),
-        "TokenPentruAcces": (token ? token : '')
+        "TokenPentruAcces":  this.filtered ? (token ? token : '') : ''
       })
     }).subscribe(
       
       listaPersoane => {
-        this.allPeople = this.allPeople.concat(listaPersoane);
-        // this.allPeople.forEach(person => {
-        //   console.log('should load photo of artist with id: ', person.person_id);
-        //   const getPhotoUrl = "http://localhost:8000/artist-photo-load/" + person.person_id;
-        //   this.http.get<any[]>(getPhotoUrl).subscribe(
-        //     photoContents=>{
-        //       person['photo']=photoContents;
-        //     }
-        //   )        
-          
-        // });
+        this.allPeople = this.allPeople.concat(listaPersoane);        
       }
     );
     }
@@ -100,12 +92,13 @@ countPeople(peopleJob:string){
   this.http.get<any>(url, {
     headers: new HttpHeaders({
       "PeopleJob": (peopleJob),
-      "TokenPentruAcces": (token ? token : '')
+      "TokenPentruAcces": this.filtered ? (token ? token : '') : '',
+      "filtered": ''+this.filtered
       })
   })
   .subscribe(
     rez => {
-      console.log('rezultat nr of people in total: ', rez);
+      console.log('rezultat nr of people in total dupa count : ', rez);
       this.nrOfPeople = rez.nr_people;
       this.numberOfPages = Math.floor(this.nrOfPeople / 4) + (this.nrOfPeople % 4 != 0 ? 1 : 0) - 1;
     

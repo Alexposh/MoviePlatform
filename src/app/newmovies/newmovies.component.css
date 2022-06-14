@@ -1,0 +1,18 @@
+.poster{
+    width:200px;
+    height:350px;
+    border-radius: 4px;
+}
+
+
+.card{
+    margin: 10px;
+
+}
+
+a{
+    margin: 8px;
+}
+.links{
+    height: 150px;
+}

@@ -1,5 +1,15 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { Movie } from '../models/movie';
+import { NavigationPage } from '../models/navigation.page';
+import { MovieSinopsysDialogComponent } from '../movie-sinopsys-dialog/movie-sinopsys-dialog.component';
+
+
+export interface DialogData {
+  animal: 'panda' | 'unicorn' | 'lion';
+}
 
 @Component({
   selector: 'app-newmovies',
@@ -7,18 +17,25 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./newmovies.component.css']
 })
 export class NewmoviesComponent implements OnInit {
+  
   pageNumberCurent: any = 0;
   nrOfMovies: number = -1;
   numberOfPages: number = -1;
   pagesBefore: number[] = [];
   pagesAfter: number[] = [];
   accessToken: string | null = '';
-  @Input() category :string = "all" ;
+  @Input() category: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public dialog: MatDialog) { }
 
   allmovies: any[] = [
   ];
+
+  openSynopsisDialog(movie: Movie){
+    this.dialog.open(MovieSinopsysDialogComponent, {
+      data: movie
+    });
+  }
 
   dateIncarcatePePagini: Map<number, any[]> = new Map<number, any[]>();
   featuredMovie: any[] = [];
@@ -43,39 +60,69 @@ export class NewmoviesComponent implements OnInit {
 
     }
   }
- 
+
+
+  // loadMoviesForPage(pageNumber: number) {
+  //   const url = 'http://localhost:8000/new-movies-list/' + pageNumber;
+  //   let dacaExistaDeja = this.dateIncarcatePePagini.has(pageNumber);
+  //   console.log('daca exista deja: ', dacaExistaDeja);
+  //   if (dacaExistaDeja) {       
+  //     this.allmovies = this.dateIncarcatePePagini.get(pageNumber) || []; // load from 'cache'
+  //   } else { 
+  //     this.http.get<any[]>(url,{
+  //       headers: new HttpHeaders({
+  //         "category": this.category
+          
+  //       })
+  //     }).subscribe(
+  //       listaFilme => {
+  //         this.allmovies = listaFilme;
+          
+  //         this.dateIncarcatePePagini.set(pageNumber, listaFilme);
+  //       }
+  //     );
+  //   }
+  // }
+
   loadMoviesForPage(pageNumber: number) {
-    const url = 'http://localhost:8000/movies-list/' + pageNumber;
-
-
+    const url = 'http://localhost:8000/movies-in-genre-by-genre-id-extra-details/' + (this.category ? this.category.genre_id : '-1') + '/' + pageNumber;
     let dacaExistaDeja = this.dateIncarcatePePagini.has(pageNumber);
+    // let obiect = {
+    //   nrPagini: 30,
+    //   movies: []
+    // };
     console.log('daca exista deja: ', dacaExistaDeja);
     if (dacaExistaDeja) {       
       this.allmovies = this.dateIncarcatePePagini.get(pageNumber) || []; // load from 'cache'
-    } else {
-      this.http.get<any[]>(url).subscribe(
+    } else { 
+      this.http.get<any>(url
+      //   ,{
+      //   headers: new HttpHeaders({
+      //     "genre": this.category
+          
+      //   })
+      // }
+      ).subscribe(
         listaFilme => {
-          this.allmovies = listaFilme;
-          console.log(this.allmovies);
-          this.dateIncarcatePePagini.set(pageNumber, listaFilme);
+          this.allmovies = listaFilme.theMoviesOnCurrentPage;
+          this.nrOfMovies = listaFilme.numberOfMovies;
+          this.numberOfPages = Math.floor(this.nrOfMovies / 4) + (this.nrOfMovies % 4 != 0 ? 1 : 0) - 1;
+          this.dateIncarcatePePagini.set(pageNumber, listaFilme.theMoviesOnCurrentPage);
+          this.allmovies.forEach(movie => {
+            console.log('should load photo of movie with id: ', movie.movie_id);
+            const getPhotoUrl = "http://localhost:8000/movie-image-load/"+movie.movie_id;
+            this.http.get<any[]>(getPhotoUrl).subscribe(
+              photoContents=>{
+                movie['poster']=photoContents;
+              }
+            ) 
+            
+          })
         }
       );
     }
   }
-
-  loadMovies() {
-    const url = 'http://localhost:8000/movies-list/' + this.pageNumberCurent;
-    return this.http.get<any[]>(url).subscribe(
-      listaFilme => {
-
-        this.allmovies = this.allmovies.concat(listaFilme);
-         console.log(this.allmovies);
-         this.dateIncarcatePePagini.set(this.pageNumberCurent, listaFilme);
-
-      }
-    );
-  }
-
+  
   navigateToPage(page: number) {
     console.log('navigating to page: ', page);
     this.pageNumberCurent = page;
@@ -93,26 +140,39 @@ export class NewmoviesComponent implements OnInit {
   }
 
   changePage(page:any){
+    console.log('changing page: ', page);
     this.navigateToPage(page);
   }
 
+  // countMoviesInCategory(){
+  //   this.http.get<any>('http://localhost:8000/new-movie-count',{
+  //     headers: new HttpHeaders({
+  //       "category": this.category        
+  //     })
+  //   })
+  //   .subscribe(
+  //     rez => {
+  //       console.log('rezultat nr of movies: ', rez);
+  //       this.nrOfMovies = rez.nr_filme;
+  //       this.numberOfPages = Math.floor(this.nrOfMovies / 4) + (this.nrOfMovies % 4 != 0 ? 1 : 0) - 1;
+      
+  //     }
+  //   )
+  // }
+
   ngOnInit(): void {
 
+    console.log('category / genre: ', this.category);
     if(localStorage.getItem('ACCESS_TOKEN') != null){
       this.accessToken = localStorage.getItem('ACCESS_TOKEN');
     }
-    this.http.get<any>('http://localhost:8000/movie-count')
-      .subscribe(
-        rez => {
-          console.log('rezultat nr of movies: ', rez);
-          this.nrOfMovies = rez.nr_filme;
-          this.numberOfPages = Math.floor(this.nrOfMovies / 4) + (this.nrOfMovies % 4 != 0 ? 1 : 0) - 1;
-        
-        }
-      );
+    // this.countMoviesInCategory();
 
     this.loadMoviesForPage(this.pageNumberCurent);
         
   }
 
+  
 }
+
+

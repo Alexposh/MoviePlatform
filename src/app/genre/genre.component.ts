@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Movie } from '../models/movie';
 import { NavigationPage } from '../models/navigation.page';
@@ -16,7 +16,7 @@ import { Page } from '../models/page';
 export class GenreComponent implements OnInit {
 
   moviesFromGenre: Movie[] = [];
-  genreSelected: string = "";
+  @Input() genreSelected: string = "";
   pageNumberCurrent: any = 0; // !!!
 
 
@@ -114,8 +114,15 @@ export class GenreComponent implements OnInit {
       // return this.http.get<any[]>(url);
       this.http.get<any>(url).subscribe(
         listaFilme => {
-          this.moviesFromGenre = listaFilme['theMoviesOnCurrentPage'];// this.moviesFromGenre.concat(listaFilme);
+
+          // let result = {
+          //   nrPagini: 30,
+          //   theMoviesOnCurrentPage: [{}, {}]
+          // }
+
+          this.moviesFromGenre = listaFilme.theMoviesOnCurrentPage;// this.moviesFromGenre.concat(listaFilme);
           console.log(this.moviesFromGenre);
+          console.log(" asta aduce listaFilme: "+listaFilme);
           this.dateIncarcatePeGenre.set(this.genreSelected + '-' + this.pageNumberCurrent, listaFilme['theMoviesOnCurrentPage']);
 
           this.nrOfMoviesInGenre = listaFilme['numberOfMovies'];

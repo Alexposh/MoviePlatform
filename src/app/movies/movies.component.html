@@ -1,10 +1,11 @@
-<br>
-<div class="container">
+ <br>
+<!--<div class="container">
     <div class="row">
       <div class="card" style="width: 18rem;" *ngFor="let movie of allmovies">
         <div class="card-body">
           <h2 class="card-title">{{movie.title}}</h2>
-          <p class="card-text">{{movie.overview}}</p>
+          <button *ngIf="movie.overview.length > 255" (click)="openSynopsisDialog(movie)">Open dialog for synopsis</button>
+          <p class="card-text">{{movie.overview | shortenTitle : 255 }}</p>
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Released on {{movie.release_date}}</li>
@@ -19,8 +20,8 @@
       </div>
     </div>
   
-  <!-- <div *ngIf="accessToken">SECRET ONLY FOR THE EYES OF THE LOGGED IN</div> -->
-  <app-pagination [nrOfPages]="numberOfPages" [currentPageNumber]="pageNumberCurent" (evenimentulSchimbarePagina)="changePage($event)"></app-pagination>
-  </div>
-
-  <!-- <app-newmovies></app-newmovies> -->
+  <div *ngIf="accessToken">SECRET ONLY FOR THE EYES OF THE LOGGED IN</div> -->
+  <!-- <app-pagination [nrOfPages]="numberOfPages" [currentPageNumber]="pageNumberCurent" (evenimentulSchimbarePagina)="changePage($event)"></app-pagination>
+ 
+ -->
+  <app-newmovies [category]="null"></app-newmovies>

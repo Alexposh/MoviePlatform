@@ -4,16 +4,16 @@
     <div class="row">
       <div class="card" style="width: 18rem;" *ngFor="let actor of allPeopleOnPage">
         <div class="card-body">
-          <h2 class="card-title">{{actor.person_name}}</h2>
-          <h2 class="card-title">{{actor.person_id}}</h2>
-          <!-- <img [src]="actor.photo.content" alt=""> -->
-          <!-- <a [routerLink]="['/single-actor', actor.person_id]"><p>More roles from {{actor.person_name}}</p></a> -->
+          <h2 class="card-title">{{actor.person_name | unicodeFriendly}}</h2>
+          <img class ="front-image" [src]="actor.photo?.content" alt="">
+           <!-- <a [routerLink]="['/single-actor', actor.person_id]"><p>More roles from {{actor.person_name}}</p></a> -->
+           <button mat-button color="primary" [routerLink]="['/single-actor', actor.person_id]">More from {{actor.person_name}}</button>
         </div>
         
     </div>
     </div>
   
- <h4>The navigation for the new structure</h4> 
+
   <app-pagination [nrOfPages]="numberOfPages" [currentPageNumber]="pageNumberCurent" (evenimentulSchimbarePagina)="changePage($event)"></app-pagination>
   <br>
   

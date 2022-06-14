@@ -31,6 +31,11 @@ import { PeopleComponent } from './people/people.component';
 import { NewmoviesComponent } from './newmovies/newmovies.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { UnicodeFriendlyPipe } from './unicode-friendly.pipe';
+import { CorrectionAreaComponent } from './correction-area/correction-area.component';
+import { MovieSinopsysDialogComponent } from './movie-sinopsys-dialog/movie-sinopsys-dialog.component';
+import { DirectorsComponent } from './directors/directors.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ShortenTitlePipe } from './shorten-title.pipe';
 
 @NgModule({
   declarations: [
@@ -52,7 +57,11 @@ import { UnicodeFriendlyPipe } from './unicode-friendly.pipe';
     PeopleComponent,
     NewmoviesComponent,
     HomepageComponent,
-    UnicodeFriendlyPipe
+    UnicodeFriendlyPipe,
+    CorrectionAreaComponent,
+    MovieSinopsysDialogComponent,
+    DirectorsComponent,
+    ShortenTitlePipe
   ],
   imports: [
     BrowserModule,
@@ -67,7 +76,8 @@ import { UnicodeFriendlyPipe } from './unicode-friendly.pipe';
     MatSnackBarModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
-    MatInputModule
+    MatInputModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

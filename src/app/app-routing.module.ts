@@ -12,6 +12,8 @@ import { ArtistsComponent } from './artists/artists.component';
 import { SingleactorComponent } from './singleactor/singleactor.component';
 import { PeopleComponent } from './people/people.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { CorrectionAreaComponent } from './correction-area/correction-area.component';
+import { DirectorsComponent } from './directors/directors.component';
 
 
 const routes: Routes = [
@@ -41,7 +43,7 @@ const routes: Routes = [
   },
   {
     path: 'directors',
-    component: PeopleComponent
+    component: DirectorsComponent
   },
   {
     path: 'login',
@@ -62,6 +64,10 @@ const routes: Routes = [
   {
     path: 'myaccount',
     component: ProfileComponent
+  },
+  {
+    path: "corrections",
+    component: CorrectionAreaComponent
   }
 ];
 

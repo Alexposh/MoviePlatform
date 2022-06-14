@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { MatDialog } from '@angular/material/dialog';
+import { MovieSinopsysDialogComponent } from '../movie-sinopsys-dialog/movie-sinopsys-dialog.component';
+import { Movie } from '../models/movie';
 
 @Component({
   selector: 'app-movies',
@@ -15,10 +18,16 @@ export class MoviesComponent implements OnInit {
   pagesAfter: number[] = [];
   accessToken: string | null = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public dialog: MatDialog) { }
 
   allmovies: any[] = [
   ];
+
+  openSynopsisDialog(movie: Movie){
+    this.dialog.open(MovieSinopsysDialogComponent, {
+      data: movie
+    });
+  }
 
   dateIncarcatePePagini: Map<number, any[]> = new Map<number, any[]>();
   featuredMovie: any[] = [];
@@ -43,7 +52,8 @@ export class MoviesComponent implements OnInit {
 
     }
   }
- 
+
+
   loadMoviesForPage(pageNumber: number) {
     const url = 'http://localhost:8000/movies-list/' + pageNumber;
 
@@ -101,17 +111,17 @@ export class MoviesComponent implements OnInit {
     if(localStorage.getItem('ACCESS_TOKEN') != null){
       this.accessToken = localStorage.getItem('ACCESS_TOKEN');
     }
-    this.http.get<any>('http://localhost:8000/movie-count')
-      .subscribe(
-        rez => {
-          console.log('rezultat nr of movies: ', rez);
-          this.nrOfMovies = rez.nr_filme;
-          this.numberOfPages = Math.floor(this.nrOfMovies / 4) + (this.nrOfMovies % 4 != 0 ? 1 : 0) - 1;
+    // this.http.get<any>('http://localhost:8000/movie-count')
+    //   .subscribe(
+    //     rez => {
+    //       console.log('rezultat nr of movies: ', rez);
+    //       this.nrOfMovies = rez.nr_filme;
+    //       this.numberOfPages = Math.floor(this.nrOfMovies / 4) + (this.nrOfMovies % 4 != 0 ? 1 : 0) - 1;
         
-        }
-      );
+    //     }
+    //   );
 
-    this.loadMoviesForPage(this.pageNumberCurent);
+    // this.loadMoviesForPage(this.pageNumberCurent);
         
   }
 

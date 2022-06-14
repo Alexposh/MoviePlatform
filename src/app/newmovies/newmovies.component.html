@@ -1,26 +1,34 @@
 <div class="container">
-    <div class="row">
-      <div class="card" style="width: 18rem;" *ngFor="let movie of allmovies">
-        <div class="card-body">
-          <h2 class="card-title">{{movie.title}}</h2>
-          <p class="card-text">{{movie.overview}}</p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Released on {{movie.release_date}}</li>
-          <li class="list-group-item">Duration: {{movie.runtime}} minutes</li>
-          <li class="list-group-item">Rating: {{movie.vote_average}} from {{movie.vote_count}} votes</li>
-        </ul>
-        <div class="card-body" *ngIf="movie.homepage">
-          <a href="{{movie.homepage}}" class="card-link" target="_blank">Website</a>
-        </div>
-        <a [routerLink]="['/single-movie', movie.movie_id]"><button mat-button>Read More</button></a>
-        
+  <div class="row">
+    <div class="card" style="width: 18rem;" *ngFor="let movie of allmovies">
+      <div class="card-body">
+        <h2 class="card-title">{{movie.title}}</h2>
+        <!-- <p class="card-text">{{movie.overview}}</p> -->
+        <button (click)="openSynopsisDialog(movie)">Open dialog for synopsis</button>
       </div>
+      <!-- <ul class="list-group list-group-flush">
+        <li class="list-group-item">Released on {{movie.release_date}}</li>
+        <li class="list-group-item">Duration: {{movie.runtime}} minutes</li>
+        <li class="list-group-item">Rating: {{movie.vote_average}} from {{movie.vote_count}} votes</li>
+      </ul> -->
+      <div class="card-body">
+        <img class ="poster" [src]="movie.poster?.contents" alt="">
+        
+       
+      </div>
+      <div class="links">
+        <a mat-stroked-button color="primary" *ngIf="movie.homepage" href="{{movie.homepage}}" class="card-link" target="_blank">Official movie website</a>
+      <a [routerLink]="['/single-movie', movie.movie_id]"><button mat-button>Read More</button></a>
+      </div>
+      
+            
     </div>
-  
-  <!-- <div *ngIf="accessToken">SECRET ONLY FOR THE EYES OF THE LOGGED IN</div> -->
-  <app-pagination [nrOfPages]="numberOfPages" [currentPageNumber]="pageNumberCurent" (evenimentulSchimbarePagina)="changePage($event)"></app-pagination>
   </div>
 
+<app-pagination [nrOfPages]="numberOfPages" [currentPageNumber]="pageNumberCurent" (evenimentulSchimbarePagina)="changePage($event)"></app-pagination>
+</div>
+
+
+  
 
   

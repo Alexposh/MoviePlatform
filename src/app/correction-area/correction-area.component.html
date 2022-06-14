@@ -1,0 +1,7 @@
+<ul>
+    <li *ngFor="let weirdName of weirdNames">{{weirdName.person_name | unicodeFriendly}} <button (click)="fixWeirdName(weirdName.person_name)">Fix this!</button>
+    Id of person {{weirdName.person_id}}
+    </li>
+</ul>
+
+<button (click)="altaFunctie()">Click</button>
