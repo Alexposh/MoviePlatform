@@ -6,7 +6,7 @@
      
      <div>
         <h3>Add photo</h3>
-        <button (click)="saveImage(artistInformation.person_id)">Save Poster</button>
+        <button mat-stroked-button color="primary" (click)="saveImage(artistInformation.person_id)">Save Poster</button>
      </div>
      
      <div>
@@ -21,7 +21,7 @@
     <ul>
         <li *ngFor="let movie of moviesPlayedIn">Played<strong> {{movie.character_name}}</strong> in <i>{{movie.title}}</i> <a [routerLink]="['/single-movie', movie.movie_id]"><button mat-button>Read More</button></a></li>
     </ul>
-    <button (click)="addAsLiked('actor')">I like his/hers acting</button>
+    <button mat-stroked-button color="primary" (click)="addAsLiked('actor')">I like his/hers acting</button>
 </div>
 
 
@@ -30,7 +30,7 @@
     <ul>
         <li *ngFor="let movie of moviesDirected">Directed <strong> {{movie.title}}</strong> released on <i>{{movie.release_date}}</i> <a [routerLink]="['/single-movie', movie.movie_id]"><button mat-button>Read More</button></a></li>
     </ul>
-    <button (click)="addAsLiked('director')">I like his/hers directing</button>
+    <button mat-stroked-button color="primary" (click)="addAsLiked('director')">I like his/hers directing</button>
 </div>
 
 <ng-template #didNotDirect><h4>No Movies directed</h4></ng-template>

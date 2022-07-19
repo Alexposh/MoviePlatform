@@ -55,7 +55,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: MainComponent
+    component: HomepageComponent
   },
   {
     path: 'genres/:selected-genre',

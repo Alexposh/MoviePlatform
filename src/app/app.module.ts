@@ -36,6 +36,7 @@ import { MovieSinopsysDialogComponent } from './movie-sinopsys-dialog/movie-sino
 import { DirectorsComponent } from './directors/directors.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ShortenTitlePipe } from './shorten-title.pipe';
+import { MatCarouselModule } from '@ngmodule/material-carousel';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { ShortenTitlePipe } from './shorten-title.pipe';
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCarouselModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

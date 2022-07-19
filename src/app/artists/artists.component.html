@@ -16,12 +16,13 @@
   <app-pagination [nrOfPages]="numberOfPages" [currentPageNumber]="pageNumberCurent" (evenimentulSchimbarePagina)="changePage($event)"></app-pagination>
   </div>
 <hr> -->
-<h4>Filtered Actors</h4>
+<!-- <h4>Filtered Actors</h4>
 <div>
   <app-people peopleJob="actor" [filtered] = "true"></app-people>
-</div>
-<h4>Uniltered Actors</h4>
+</div> -->
+
 <div>
+  <h2>Actors sorted by ID</h2>
   <app-people peopleJob="actor" [filtered] = "false"></app-people>
 </div>
   <!-- <app-people peopleJob="actor" [filtered] = "true"></app-people>

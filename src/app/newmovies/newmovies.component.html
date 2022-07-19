@@ -3,14 +3,8 @@
     <div class="card" style="width: 18rem;" *ngFor="let movie of allmovies">
       <div class="card-body">
         <h2 class="card-title">{{movie.title}}</h2>
-        <!-- <p class="card-text">{{movie.overview}}</p> -->
-        <button (click)="openSynopsisDialog(movie)">Open dialog for synopsis</button>
+        <button mat-stroked-button color="primary" (click)="openSynopsisDialog(movie)">Short info set</button>
       </div>
-      <!-- <ul class="list-group list-group-flush">
-        <li class="list-group-item">Released on {{movie.release_date}}</li>
-        <li class="list-group-item">Duration: {{movie.runtime}} minutes</li>
-        <li class="list-group-item">Rating: {{movie.vote_average}} from {{movie.vote_count}} votes</li>
-      </ul> -->
       <div class="card-body">
         <img class ="poster" [src]="movie.poster?.contents" alt="">
         

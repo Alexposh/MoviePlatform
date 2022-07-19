@@ -3,21 +3,46 @@
 <div class="container">
     <div class="row">
       <div class="card" style="width: 18rem;" *ngFor="let movie of movies">
-        <!-- <img class="card-img-top" src="" alt="Card image cap"> -->
-        <div class="card-body">
+         <div class="card-body">
           <h2 class="card-title">{{movie.title}}</h2>
-          <p class="card-text">{{movie.overview}}</p>
+          <button mat-stroked-button color="primary" (click)="openSynopsisDialog(movie)">Short info set</button>
+          <!-- <p class="card-text">{{movie.overview}}</p> -->
         </div>
-        <ul class="list-group list-group-flush">
+        <!-- <ul class="list-group list-group-flush">
           <li class="list-group-item">Released on {{movie.release_date}}</li>
           <li class="list-group-item">Duration: {{movie.runtime}} minutes</li>
           <li class="list-group-item">Rating: {{movie.vote_average}} from {{movie.vote_count}} votes</li>
-        </ul>
+        </ul> -->
+        <div class="card-body">
+          <img class ="poster" [src]="movie.poster?.contents" alt="">
+        </div>
         <div class="card-body" *ngIf="movie.homepage">
-          <a href="{{movie.homepage}}" class="card-link" target="_blank">Website</a>
+          <a mat-stroked-button color="primary" href="{{movie.homepage}}" class="card-link" target="_blank">Official movie website</a>
         </div>
         <a [routerLink]="['/single-movie', movie.movie_id]"><button mat-button>Read More</button></a>
-        <!-- <componenta-movie-single [movie]="movie"></componenta-movie-single> -->
+
       </div>
     </div>
   </div>
+
+  <!-- <div class="row">
+    <div class="card" style="width: 18rem;" *ngFor="let movie of movies">
+      <div class="card-body">
+        <h2 class="card-title">{{movie.title}}</h2>
+        <button mat-stroked-button color="primary" (click)="openSynopsisDialog(movie)">Short info set</button>
+      </div>
+      <div class="card-body">
+        <img class ="poster" [src]="movie.poster?.contents" alt="">
+        
+       
+      </div>
+      <div class="links">
+        <a mat-stroked-button color="primary" *ngIf="movie.homepage" href="{{movie.homepage}}" class="card-link" target="_blank">Official movie website</a>
+      <a [routerLink]="['/single-movie', movie.movie_id]"><button mat-button>Read More</button></a>
+      </div>
+      
+            
+    </div>
+  </div> -->
+ 
+  <!-- <app-newmovies></app-newmovies> -->

@@ -1,5 +1,5 @@
-<button mat-button [disabled]="pageNumberCurrent == 0" (click)="navigate('prev')">Previous</button>
-<button mat-button (click)="navigate('next')">Next</button>
+<!-- <button mat-button [disabled]="pageNumberCurrent == 0" (click)="navigate('prev')">Previous</button>
+<button mat-button (click)="navigate('next')">Next</button> -->
 <div class="container">
     <div class="row">
   <div class="card" style="width: 18rem;" *ngFor="let movie of moviesFromGenre">
@@ -37,14 +37,14 @@
   <div>
     <button *ngFor="let pra of pageRangeArray" [color]="pra.isCurrent ? 'primary' : ''" [disabled] = "pra.disabled" mat-raised-button (click)="navigateToPage(pra.pageNumber)">{{pra.pageLabel}}</button>
   </div> -->
-  <p>Number of pages: {{ numberOfPagesInGenre }}</p>
-  <p>Number of movies in genre: {{ nrOfMoviesInGenre }}</p>
-  <button (click)="displayCache()">Display cache</button>
+  <!-- <p>Number of pages: {{ numberOfPagesInGenre }}</p>
+  <p>Number of movies in genre: {{ nrOfMoviesInGenre }}</p> -->
+  <!-- <button (click)="displayCache()">Display cache</button> -->
 
-  <select >
+  <!-- <select >
     <option>Asc</option>
     <option >Desc</option>
-  </select>
+  </select> -->
 <br>
   <app-pagination [nrOfPages]="numberOfPagesInGenre" [currentPageNumber]="pageNumberCurrent" (evenimentulSchimbarePagina)="test($event)"></app-pagination>
 </div>

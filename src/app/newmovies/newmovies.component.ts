@@ -6,6 +6,8 @@ import { Movie } from '../models/movie';
 import { NavigationPage } from '../models/navigation.page';
 import { MovieSinopsysDialogComponent } from '../movie-sinopsys-dialog/movie-sinopsys-dialog.component';
 import { environment } from 'src/environments/environment';
+import { MoviesService } from '../movies.service';
+ 
 
 export interface DialogData {
   animal: 'panda' | 'unicorn' | 'lion';
@@ -24,9 +26,10 @@ export class NewmoviesComponent implements OnInit {
   pagesBefore: number[] = [];
   pagesAfter: number[] = [];
   accessToken: string | null = '';
-  @Input() category: any;
+  @Input() category: any = {category_id: -1, genre_name: "all"};
 
-  constructor(private http: HttpClient, public dialog: MatDialog) { }
+
+  constructor(private http: HttpClient, public dialog: MatDialog,private moviesService: MoviesService) { }
 
   allmovies: any[] = [
   ];
@@ -37,6 +40,7 @@ export class NewmoviesComponent implements OnInit {
     });
   }
 
+  
   dateIncarcatePePagini: Map<number, any[]> = new Map<number, any[]>();
   featuredMovie: any[] = [];
 
@@ -47,7 +51,7 @@ export class NewmoviesComponent implements OnInit {
     if (type == 'prev') {
       
       this.pageNumberCurent--;
-      
+       
       this.loadMoviesForPage(this.pageNumberCurent);
       
     } else if (type == 'next') {
@@ -85,39 +89,53 @@ export class NewmoviesComponent implements OnInit {
   // }
 
   loadMoviesForPage(pageNumber: number) {
-    const url = environment.serverContextPath + '/movies-in-genre-by-genre-id-extra-details/' + (this.category ? this.category.genre_id : '-1') + '/' + pageNumber;
+    // const url = environment.serverContextPath + '/movies-in-genre-by-genre-id-extra-details/' + (this.category.genre_id ? this.category.genre_id : '-1') + '/' + pageNumber;
     let dacaExistaDeja = this.dateIncarcatePePagini.has(pageNumber);
-    // let obiect = {
-    //   nrPagini: 30,
-    //   movies: []
-    // };
-    console.log('daca exista deja: ', dacaExistaDeja);
+    // console.log('daca exista deja: ', dacaExistaDeja);
     if (dacaExistaDeja) {       
       this.allmovies = this.dateIncarcatePePagini.get(pageNumber) || []; // load from 'cache'
     } else { 
-      this.http.get<any>(url
+      this.moviesService.getMoviesForPage(this.category.genre_id, pageNumber)
+      // this.http.get<any>(url
       //   ,{
       //   headers: new HttpHeaders({
       //     "genre": this.category
           
       //   })
       // }
-      ).subscribe(
+      .subscribe(
         listaFilme => {
           this.allmovies = listaFilme.theMoviesOnCurrentPage;
           this.nrOfMovies = listaFilme.numberOfMovies;
           this.numberOfPages = Math.floor(this.nrOfMovies / 4) + (this.nrOfMovies % 4 != 0 ? 1 : 0) - 1;
           this.dateIncarcatePePagini.set(pageNumber, listaFilme.theMoviesOnCurrentPage);
-          this.allmovies.forEach(movie => {
-            console.log('should load photo of movie with id: ', movie.movie_id);
-            const getPhotoUrl = "http://localhost:8000/movie-image-load/"+movie.movie_id;
-            this.http.get<any[]>(getPhotoUrl).subscribe(
-              photoContents=>{
-                movie['poster']=photoContents;
+
+          this.http.post<Array<any>>(`http://localhost:8000/movies-images-load`, this.allmovies.map(x => x.movie_id))
+            .subscribe(
+              imaginile => {
+                for(let movie of this.allmovies){
+                  for(let imagine of imaginile){
+                    if(movie.movie_id == imagine.id && imagine.image){
+                      movie['poster']=imagine.image;
+                    }
+                  }
+                }                
+              },
+              err => {
+                console.log(err);
               }
-            ) 
+            );
+
+          // this.allmovies.forEach(movie => {
+          //   console.log('should load photo of movie with id: ', movie.movie_id);
+          //   const getPhotoUrl = "http://localhost:8000/movie-image-load/"+movie.movie_id;
+          //   this.http.get<any[]>(getPhotoUrl).subscribe(
+          //     photoContents=>{
+          //       movie['poster']=photoContents;
+          //     }
+          //   ) 
             
-          })
+          // })
         }
       );
     }

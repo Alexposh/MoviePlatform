@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Homepage } from '../models/homepage';
+import { HomepageCategory } from '../models/HomepageCategory';
 
 @Component({
   selector: 'app-homepage',
@@ -11,6 +13,19 @@ export class HomepageComponent implements OnInit {
   constructor(private http: HttpClient) { }
   genreList:any[]=[];
   
+  dateIncarcatePeHomepage: HomepageCategory[] = [];
+
+  @HostListener("window:scroll", [])
+  onScroll(): void {
+    console.log('offset height: ', document.body.offsetHeight);
+    console.log('scroll height: ', document.body.scrollHeight);
+    console.log('scroll Y: ', window.scrollY);
+  if ((window.scrollY + document.body.offsetHeight + 250) >= document.body.scrollHeight) {
+          // you're at the bottom of the page
+          console.log('bottom of page!!!');
+      }
+  }
+
   getGenres() {
 
     // let headers = new HttpHeaders();

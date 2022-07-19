@@ -4,3 +4,11 @@
     padding: 25px;
     border-radius: 5PX;
 }
+
+button{
+    margin: 15px;
+}
+
+li{
+    list-style-type: none;
+}

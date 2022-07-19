@@ -17,11 +17,13 @@ export class MoviesComponent implements OnInit {
   pagesBefore: number[] = [];
   pagesAfter: number[] = [];
   accessToken: string | null = '';
+  category: any;
 
   constructor(private http: HttpClient, public dialog: MatDialog) { }
 
   allmovies: any[] = [
   ];
+  
 
   openSynopsisDialog(movie: Movie){
     this.dialog.open(MovieSinopsysDialogComponent, {

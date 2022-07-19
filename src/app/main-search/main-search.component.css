@@ -1,3 +1,9 @@
 .card{
     margin:15px;
    }
+
+   .poster{
+    width:200px;
+    height:350px;
+    border-radius: 4px;
+}

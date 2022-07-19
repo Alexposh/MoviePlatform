@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { BasicServiceService } from '../basic-service.service';
 
 @Component({
   selector: 'app-people',
@@ -21,7 +22,8 @@ export class PeopleComponent implements OnInit {
   dateIncarcatePePagini: Map<number, any[]> = new Map<number, any[]>();
 
   
-  constructor(private http: HttpClient) { }
+  // let basicService = new BasicServiceService();
+  constructor(private http: HttpClient, private basicService: BasicServiceService) { }
   changePage(page:any){
     this.navigateToPage(page);
   }
@@ -32,23 +34,23 @@ export class PeopleComponent implements OnInit {
     this.loadPeopleForPage(this.peopleJob, this.pageNumberCurent);
   }
 
-  loadPeopleForPage(peopleJob:string, pageNumber: number) {
-    const url = 'http://localhost:8000/people-list-for-page/' + pageNumber;
-
-    const token = localStorage.getItem("ACCESS_TOKEN");
+  loadPeopleForPage(peopleJob:string, pageNumber: number) { // add service - TO DO
+    // const url = 'http://localhost:8000/people-list-for-page/' + pageNumber;
+    // const token = localStorage.getItem("ACCESS_TOKEN");
     let dacaExistaDeja = this.dateIncarcatePePagini.has(pageNumber);
-    console.log('daca exista deja: ', dacaExistaDeja);
+    // console.log('daca exista deja: ', dacaExistaDeja);
     if (dacaExistaDeja) {       
       this.allPeopleOnPage = this.dateIncarcatePePagini.get(pageNumber) || [];
       } else {
-        console.log('filtered: ', this.filtered);
-      this.http.get<any[]>(url, {
-        headers: new HttpHeaders({
-          "PeopleJob": (peopleJob),
-          "TokenPentruAcces": this.filtered ?  (token ? token : '') : '',
-          "filtered": ''+this.filtered
-        })
-      }).subscribe(
+        // console.log('filtered: ', this.filtered);
+      // this.http.get<any[]>(url, {
+      //   headers: new HttpHeaders({
+      //     "PeopleJob": (peopleJob),
+      //     "TokenPentruAcces": this.filtered ?  (token ? token : '') : '',
+      //     "filtered": ''+this.filtered
+      //   })
+      // }
+      this.basicService.getPeopleForPage(peopleJob,pageNumber, this.filtered).subscribe(
         listaPeopleOnPage => {
           this.allPeopleOnPage = listaPeopleOnPage;
           this.allPeopleOnPage.forEach(person => {
@@ -69,33 +71,35 @@ export class PeopleComponent implements OnInit {
     }
   }
 
-  loadPeople(peopleJob:string) {
-    const url = 'http://localhost:8000/people-list';
-    const token = localStorage.getItem("ACCESS_TOKEN");
-    console.log('filtered: ', this.filtered);
-    return this.http.get<any[]>(url, {
-      headers: new HttpHeaders({
-        "PeopleJob": (peopleJob),
-        "TokenPentruAcces":  this.filtered ? (token ? token : '') : ''
-      })
-    }).subscribe(
+  // loadPeople(peopleJob:string) {
+  //   const url = 'http://localhost:8000/people-list';
+  //   const token = localStorage.getItem("ACCESS_TOKEN");
+  //   console.log('filtered: ', this.filtered);
+  //   return this.http.get<any[]>(url, {
+  //     headers: new HttpHeaders({
+  //       "PeopleJob": (peopleJob),
+  //       "TokenPentruAcces":  this.filtered ? (token ? token : '') : ''
+  //     })
+  //   }).subscribe(
       
-      listaPersoane => {
-        this.allPeople = this.allPeople.concat(listaPersoane);        
-      }
-    );
-    }
+  //     listaPersoane => {
+  //       this.allPeople = this.allPeople.concat(listaPersoane);        
+  //     }
+  //   );
+  //   }
 
 countPeople(peopleJob:string){
-  const url : string = 'http://localhost:8000/people-count';
-  const token = localStorage.getItem("ACCESS_TOKEN");
-  this.http.get<any>(url, {
-    headers: new HttpHeaders({
-      "PeopleJob": (peopleJob),
-      "TokenPentruAcces": this.filtered ? (token ? token : '') : '',
-      "filtered": ''+this.filtered
-      })
-  })
+  // const url : string = 'http://localhost:8000/people-count';
+  // const token = localStorage.getItem("ACCESS_TOKEN");
+  // this.http.get<any>(url, {
+  //   headers: new HttpHeaders({
+  //     "PeopleJob": (peopleJob),
+  //     "TokenPentruAcces": this.filtered ? (token ? token : '') : '',
+  //     "filtered": ''+this.filtered
+  //     })
+  // })
+
+  this.basicService.getPeopleCount(peopleJob, this.filtered)
   .subscribe(
     rez => {
       console.log('rezultat nr of people in total dupa count : ', rez);

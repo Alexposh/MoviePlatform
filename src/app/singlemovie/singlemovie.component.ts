@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, ReplaySubject } from 'rxjs';
 import { Movie } from '../models/movie';
+import { environment } from 'src/environments/environment';
+import { MatCarouselModule } from '@ngmodule/material-carousel';
 
 
 @Component({
@@ -20,6 +22,7 @@ export class SinglemovieComponent implements OnInit {
   movie_crew:any[]=[];
   castShown:boolean=false;
   moviePoster: any;
+  moviePhotos:any[] = [];
   possibleOpinions:any[]=[];
 
   imagineBase64 : string | undefined = '';
@@ -28,7 +31,7 @@ export class SinglemovieComponent implements OnInit {
    constructor(private http:HttpClient, private activatedRoute : ActivatedRoute) { }
 
    loadSingleMovie(id:number){
-    const url = 'http://localhost:8000/movie-item/'+id;
+    const url = environment.serverContextPath +'/movie-item/'+id;
     return this.http.get<any>(url).subscribe(
       selectedMovie=>{
         this.featuredMovie = selectedMovie;
@@ -38,7 +41,7 @@ export class SinglemovieComponent implements OnInit {
   }
 
   loadCast(id:number){
-    const url = 'http://localhost:8000/movie-cast/'+id;
+    const url = environment.serverContextPath +'/movie-cast/'+id;
     return this.http.get<any>(url).subscribe(
       movieCast=>{
         this.cast_members = movieCast;
@@ -48,7 +51,7 @@ export class SinglemovieComponent implements OnInit {
   }
 
   getPossibleOpinions(){
-    const url = 'http://localhost:8000/possible-opinions';
+    const url = environment.serverContextPath +'/possible-opinions';
     return this.http.get<any>(url).subscribe(
       foundOpinions=>{
         this.possibleOpinions = foundOpinions;
@@ -58,7 +61,7 @@ export class SinglemovieComponent implements OnInit {
   }
 
   loadCrew(id:number){
-    const url = 'http://localhost:8000/movie-crew/'+id;
+    const url = environment.serverContextPath +'/movie-crew/'+id;
     // const url = 'http://localhost:8000/movie-crew/'+id + '?access_token=' + localStorage.getItem('ACCESS_TOKEN');
     return this.http.get<any>(url).subscribe(
       movieCrew=>{
@@ -88,6 +91,7 @@ export class SinglemovieComponent implements OnInit {
       this.loadCast(this.idCurrentMovie);
       this.loadCrew(this.idCurrentMovie);
       this.loadImage(this.idCurrentMovie);
+      this.loadCarouselImages(this.idCurrentMovie);
       this.getPossibleOpinions();
     });
 
@@ -120,7 +124,7 @@ export class SinglemovieComponent implements OnInit {
 
   storePhoto(id:number){
     console.log("save the photo: " + this.imagineBase64);
-    const url = 'http://localhost:8000/movie-image/'+id;
+    const url = environment.serverContextPath +'/movie-image/'+id;
     return this.http.post<any>(url, id, {headers:new HttpHeaders({
       "Content-Type":"application/json"
     })}).subscribe(
@@ -132,7 +136,7 @@ export class SinglemovieComponent implements OnInit {
   }
 
   saveImage(id:number){
-    const url = 'http://localhost:8000/movie-image-save';
+    const url = environment.serverContextPath +'/movie-image-save';
     let bodyRequest = {
       id : id,
       content:this.imagineBase64
@@ -150,8 +154,26 @@ export class SinglemovieComponent implements OnInit {
 
   }
 
+  saveCarouselImage(id:number){
+    const url = environment.serverContextPath +'/movie-carousel-image-save';
+    let bodyRequest = {
+      id : id,
+      content:this.imagineBase64
+    };
+    return this.http.post<any>(url, bodyRequest, {headers:new HttpHeaders({
+      "Content-Type":"application/json"
+    })}).subscribe(
+      IdFilmPhotoAdded=>{
+        // this.moviePoster = this.imagineBase64;
+        console.log('imaginea incarcata in carousel pentru filmul cu id: ',  IdFilmPhotoAdded);
+      }
+    );
+  }
+
+
   loadImage(id:number){
-    const url = 'http://localhost:8000/movie-image-load/'+id;
+ 
+    const url = environment.serverContextPath +'/movie-image-load/'+id;
   
     return this.http.get<any>(url).subscribe(
       existImagine=>{
@@ -159,6 +181,23 @@ export class SinglemovieComponent implements OnInit {
         console.log('avem imaginea incarcata pentru filmul cu id: ',  existImagine.id);
         console.log('imaginea base64: ', existImagine.contents);
         console.log('test: ', existImagine);
+      }
+    );
+  }
+
+
+  loadCarouselImages(id:number){
+ 
+    const url = environment.serverContextPath +'/movie-carousel-load/'+id;
+  
+    return this.http.get<any>(url).subscribe(
+      carouselImages=>{
+        this.moviePhotos = carouselImages;
+        for(let image of carouselImages){
+          console.log("imaginea cu id: "+ image.id +" pentru filmul cu id: "+image.movie_id);
+        }
+        
+        
       }
     );
   }

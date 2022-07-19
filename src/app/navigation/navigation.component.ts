@@ -37,11 +37,12 @@ export class NavigationComponent implements OnInit {
     {
       pagePath: "directors",
       pageName: "Directors"
-    },
-    {
-      pagePath: "genres/" + this.selected_genre,
-      pageName: "Go to Genre"
     }
+    // ,
+    // {
+    //   pagePath: "genres/" + this.selected_genre,
+    //   pageName: "Go to Genre"
+    // }
   ]
 
   userRelated: any[] = [

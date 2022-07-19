@@ -24,9 +24,16 @@
 
      <div>
           <!-- Search should be active only after 3 keys have been pressed -->
-          <select (change)="setCriteriaField()" [(ngModel)]="searchCriteriaFieldSelected">
+          <!-- <select (change)="setCriteriaField()" [(ngModel)]="searchCriteriaFieldSelected">
                <option *ngFor="let criteria of searchCriteriaField" [ngValue]="criteria">{{criteria}}</option>
-          </select>
+          </select> -->
+          <mat-form-field appearance="fill">
+               <mat-label class="label">What are you searching for?</mat-label>
+               <mat-select (change)="setCriteriaField()">
+                    <mat-option class="option" *ngFor="let criteria of searchCriteriaField" [value]="criteria">
+                         {{criteria}}</mat-option>
+               </mat-select>
+          </mat-form-field>
 
           <mat-form-field class="example-full-width" appearance="fill">
                <mat-label>Search here...</mat-label>
@@ -47,10 +54,6 @@
 
           <!-- <input type="text" placeholder="Title search..." [(ngModel)]="searchTitle" (keyup)="changeSearch()"> -->
           <!-- <option *ngFor="let ddoption of filteredOptions | async" [ngValue]="ddoption">{{ddoption.title}}</option> -->
-          
-          
-          
-          
           <!-- <mat-form-field class="example-full-width" appearance="fill">
                <mat-label>Number</mat-label>
                <input type="text"
