@@ -98,6 +98,7 @@ export class NavigationComponent implements OnInit {
     console.log("selected: " + this.selected_genre);
     this.router.navigate(['/genres', this.selected_genre]);
   }
+  
   getGenres() {
 
     // let headers = new HttpHeaders();

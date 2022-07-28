@@ -24,6 +24,7 @@ export class SinglemovieComponent implements OnInit {
   moviePoster: any;
   moviePhotos:any[] = [];
   possibleOpinions:any[]=[];
+  opinionSelected:string = "";
 
   imagineBase64 : string | undefined = '';
   textImagine:string | undefined="";
@@ -50,12 +51,40 @@ export class SinglemovieComponent implements OnInit {
     );
   }
 
+  afterOpinionSelect() {
+    console.log("selected: " + this.opinionSelected);
+    
+    
+    
+  }
+
   getPossibleOpinions(){
     const url = environment.serverContextPath +'/possible-opinions';
     return this.http.get<any>(url).subscribe(
       foundOpinions=>{
         this.possibleOpinions = foundOpinions;
         console.log('opinions: ', foundOpinions);
+      }
+    );
+  }
+
+  saveOpinion(id:number){
+    console.log("this should save the opinion to database");
+    const url =environment.serverContextPath + "/opinion-send";
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    console.log('token: ', token);
+    let postBody = {
+      id: id,
+      opinionSent: this.opinionSelected
+    };
+    this.http.post<any>(url,postBody, {headers:new HttpHeaders({
+      "Content-Type":"application/json",
+      
+      "TokenPentruAcces": (token ? token : '')      
+    })}).subscribe(
+      IdOfMovieOpinion=>{
+        // this.moviePoster = this.imagineBase64;
+        console.log('opinia salvata pentru userul cu id: ',  IdOfMovieOpinion.idUser);
       }
     );
   }
@@ -170,7 +199,7 @@ export class SinglemovieComponent implements OnInit {
     );
   }
 
-
+  
   loadImage(id:number){
  
     const url = environment.serverContextPath +'/movie-image-load/'+id;

@@ -11,8 +11,9 @@
        
       </div>
       <div class="links">
+        <a [routerLink]="['/single-movie', movie.movie_id]"><button mat-button>Read More</button></a>
         <a mat-stroked-button color="primary" *ngIf="movie.homepage" href="{{movie.homepage}}" class="card-link" target="_blank">Official movie website</a>
-      <a [routerLink]="['/single-movie', movie.movie_id]"><button mat-button>Read More</button></a>
+      
       </div>
       
             

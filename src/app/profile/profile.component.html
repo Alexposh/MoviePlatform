@@ -1,12 +1,13 @@
 
 
 <div class="container featured">
-    <img src="../../assets/user.png" alt=""><hr>
+    <img src="../../assets/user1.png" alt=""><hr>
 
     <!-- <button (click)="identifyUser()">Identify user</button> -->
-    <button (click)="getMoviesOpinions(1)">Show Movies I like:</button>
+    <button class="reveal" mat-stroked-button (click)="getMoviesOpinions(1)" (click)="showLikedMoviesSegment()" *ngIf="!showLikedMovies">Show Movies I like:</button>
+    <button class="reveal" mat-stroked-button (click)="hideLikedMoviesSegment()" *ngIf="showLikedMovies">Hide Movies I like:</button>
 <!-- <h4>Movies I like: </h4> -->
-<div class="row">
+<div class="row" *ngIf="showLikedMovies">
     <div class="card" style="width: 18rem;" *ngFor="let movie of likedMovies">
       <div class="card-body">
         <h2 class="card-title">{{movie.title}}</h2> 
@@ -22,8 +23,9 @@
 
 <hr>
 
-<button (click)="getMoviesOpinions(2)">Movies I want to see:</button>
-<div class="row">
+<button class="reveal" mat-stroked-button (click)="getMoviesOpinions(2)" (click)="showInterestedInMoviesSegment()" *ngIf="!showInterestedMovies">Show Movies I want to see:</button>
+<button class="reveal" mat-stroked-button (click)="hideInterestedInMoviesSegment()" *ngIf="showInterestedMovies">Hide Movies I want to see:</button>
+<div class="row" *ngIf="showInterestedMovies">
     <div class="card" style="width: 18rem;" *ngFor="let movie of wishlistMovies">
       <div class="card-body">
         <h2 class="card-title">{{movie.title}}</h2>
@@ -38,8 +40,9 @@
 
 <hr>
 
-<button (click)="getMoviesOpinions(3)">Movies I hate:</button>
-<div class="row">
+<button class="reveal" mat-stroked-button (click)="getMoviesOpinions(3)" (click)="showHatedMoviesSegment()" *ngIf="!showHatedMovies">Show Movies I hate:</button>
+<button class="reveal" mat-stroked-button (click)="hideHatedMoviesSegment()" *ngIf="showHatedMovies">Hide Movies I hate:</button>
+<div class="row" *ngIf="showHatedMovies">
     <div class="card" style="width: 18rem;" *ngFor="let movie of hatedMovies">
       <div class="card-body">
         <h2 class="card-title">{{movie.title}}</h2>
@@ -55,7 +58,7 @@
 
 <hr>
 <h4>My favourite actors: </h4>
-<button (click)="getArtistOpinions('actor')">Actors I like:</button>
+<button mat-stroked-button (click)="getArtistOpinions('actor')">Actors I like:</button>
 <app-people peopleJob="actor" [filtered]=true></app-people>
 <!-- <h4>Movies I like: </h4> -->
 <!-- <div class="row">
@@ -70,7 +73,7 @@
 <hr>
 
 <h4>My favourite directors: </h4>
-<button (click)="getArtistOpinions('director')">Directors I like:</button>
+<button mat-stroked-button (click)="getArtistOpinions('director')">Directors I like:</button>
 <app-people peopleJob="Director" [filtered]=true></app-people>
 <!-- <h4>Movies I like: </h4> -->
 <!-- <div class="row">

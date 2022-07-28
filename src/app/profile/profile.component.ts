@@ -19,6 +19,11 @@ export class ProfileComponent implements OnInit {
   likedActors: any[] = [];
   likedDirectors: any[] = [];
 
+  showLikedMovies:boolean = false;
+  showInterestedMovies:boolean = false;
+  showHatedMovies:boolean = false;
+
+
 
   /**
    * Method which gets info about the user by a token param
@@ -31,6 +36,30 @@ export class ProfileComponent implements OnInit {
         console.log(this.userLoggedInId);
       }
     );
+  }
+
+  hideLikedMoviesSegment(){
+    this.showLikedMovies = false;
+
+  }
+  hideInterestedInMoviesSegment(){
+    this.showInterestedMovies = false;
+  }
+
+  hideHatedMoviesSegment(){
+    this.showHatedMovies = false;
+  }
+
+  showLikedMoviesSegment(){
+    this.showLikedMovies = true;
+
+  }
+  showInterestedInMoviesSegment(){
+    this.showInterestedMovies = true;
+  }
+
+  showHatedMoviesSegment(){
+    this.showHatedMovies = true;
   }
 
   getMoviesOpinions(opinion: number): void {

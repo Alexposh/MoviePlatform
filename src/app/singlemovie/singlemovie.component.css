@@ -12,3 +12,37 @@ button{
 li{
     list-style-type: none;
 }
+
+img{
+    width:400px;
+    margin: auto;
+    display: block;
+}
+
+input{
+    margin: auto;
+}
+#top-part{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+   }
+
+h1, h3{
+    display: block;
+    text-align: center;
+}
+.carousel-content{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    /* border: 2px solid red; */
+    
+}
+
+.poster-upload{
+    display: block;
+    text-align: center;
+}

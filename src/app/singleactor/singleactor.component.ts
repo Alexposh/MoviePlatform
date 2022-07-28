@@ -19,7 +19,8 @@ export class SingleactorComponent implements OnInit {
   reactionAs: string = 'ACTOR';
   imagineBase64 : string | undefined = '';
   artistPhoto: any;
-
+  // thumbnailsId = for each element in Movies played in  push 
+  thumbnails: any[] = [];
   // http://localhost:8000/save-reaction/actor/144
 
   // http://localhost:8000/save-reaction/114/director
@@ -77,7 +78,7 @@ export class SingleactorComponent implements OnInit {
   }
 
   loadImage(id:number){
-    const url = 'http://localhost:8000/artist-image-load/'+id;
+    const url = 'http://localhost:8000/artist-photo-load/'+id;
   
     return this.http.get<any>(url).subscribe(
       existImagine=>{
@@ -115,6 +116,11 @@ export class SingleactorComponent implements OnInit {
 
         this.moviesPlayedIn = this.moviesPlayedIn.concat(listaFilmeForActor);
          console.log('he played in these movies: ',this.moviesPlayedIn);
+         // thumbnails
+         let idsOfMovies = this.moviesPlayedIn.map(x => x.movie_id);
+         console.log('IDS OF MOVIES: ', idsOfMovies);
+         let postBody = {"idsOfMovies" : idsOfMovies};
+         /////////////////////////
          this.numberOfMoviesPlayedIn= this.moviesPlayedIn.length;
          
       }

@@ -16,17 +16,19 @@
     </div>
 
 </div>
-<h2>He/She played in these movies:</h2>
-<div class="list">
+
+<div class="list" *ngIf="numberOfMoviesPlayedIn > 0; else didNotAct">
+    <h2>He/She played in these movies:</h2>
     <ul>
         <li *ngFor="let movie of moviesPlayedIn">Played<strong> {{movie.character_name}}</strong> in <i>{{movie.title}}</i> <a [routerLink]="['/single-movie', movie.movie_id]"><button mat-button>Read More</button></a></li>
     </ul>
     <button mat-stroked-button color="primary" (click)="addAsLiked('actor')">I like his/hers acting</button>
 </div>
+<ng-template #didNotAct><h4>Did not play in any movie</h4></ng-template>
 
 
 <div class="list" *ngIf="numberOfMoviesDirected > 0; else didNotDirect">
-    <h2>Also directed these movies:</h2>
+    <h2>He/She directed these movies:</h2>
     <ul>
         <li *ngFor="let movie of moviesDirected">Directed <strong> {{movie.title}}</strong> released on <i>{{movie.release_date}}</i> <a [routerLink]="['/single-movie', movie.movie_id]"><button mat-button>Read More</button></a></li>
     </ul>
